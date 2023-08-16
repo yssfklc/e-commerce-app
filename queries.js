@@ -1,4 +1,3 @@
-const express = require('express');
 const db= require('./clientdb.js');
 
 
@@ -17,23 +16,7 @@ const getUsers = (request, response)=>{
 
 
 
-const createUser = (request, response)=>{
-    const {name, email, password}=request.body
-    let lastProductid=null;
-    db.pool.query('SELECT id FROM users ORDER BY id DESC LIMIT 1', (error, results)=>{
-        if(error){
-            throw error;
-        }
-        lastProductid = results.rows[0].id + 1;
-        db.pool.query('INSERT INTO users (id, name, email, password) VALUES ($1, $2, $3, $4) RETURNING *', [lastProductid, name, email, password], (error, results)=>{
-            if(error){
-                throw error
-            }
-            response.status(201).send(`User added with ID: ${results.rows[0].id}`)
-        })
-        
-    });
-}
+
 
 
 // Orders Queries
@@ -163,7 +146,6 @@ const createCarts = (request, response)=>{
 }
 module.exports={
     getUsers,
-    createUser,
     getOrders,
     getProducts,
     createProduct,
