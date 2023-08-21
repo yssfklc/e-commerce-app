@@ -1,0 +1,20 @@
+.form-container{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.form{
+    background-color: #F8F8F8;
+    padding: 2.5rem;
+
+    /* display: flex;
+    align-items: center; */
+}
+.form .form-element{
+    display: flex;
+    flex-direction: column;
+    color: black;
+    font-size: large;
+    padding-bottom: 1rem;
+}

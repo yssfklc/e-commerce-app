@@ -1,0 +1,30 @@
+.navbar{
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 5px solid #526EB6;
+    background-color: #fff;
+}
+.leftnavelements{
+    
+    display: flex;
+    
+}
+.leftnavelements a{
+    text-decoration: none;
+    margin-right: 7px;
+    color: #526EB6;
+    font-size: 1.3rem;
+}
+.rightnavelements{
+    margin-right: 7px;
+    color: #526EB6;
+    display: flex;
+    font-size: 1.3rem;
+}
+.rightnavelements a{
+    text-decoration: none;
+    margin-right: 7px;
+    color: #526EB6;
+    font-size: 1.3rem;
+}
