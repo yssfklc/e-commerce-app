@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import './Register.css';
 import { useNavigate } from 'react-router-dom';
 import personlogo from '../img/person.svg';
@@ -6,7 +6,6 @@ import personlogo from '../img/person.svg';
 function Register(){
 const [userName, setUserName]=useState('');
 const [password, setPassword]=useState('');
-const [err, setErr]=useState('');
 
 const navigate = useNavigate();
 
@@ -27,7 +26,7 @@ const handleClick=(event)=>{
     } 
     async function register(data){
         try{
-            const response = await fetch('http://localhost:8000/register',{
+            const response = await fetch('http://localhost:8000/login',{
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
@@ -37,25 +36,30 @@ const handleClick=(event)=>{
                 body: JSON.stringify(data),
                 
             });
+            // const user = await response.json();
+            console.log(response)
             if(response.ok){
                 navigate('/home')
-            }else if(!response.ok && response.redirected){
-                console.log('lale')
-                setErr('user already exist')
-                
             }else{
-                setErr('try again')
+                // navigate('/register')
+                navigate('/login')
             }
-        }catch(err){
-            setErr(err);
-            console.log(err)
+        }catch(error){
+            console.log(error);
         }
+
     }
     register(data);
+    
+    
+    // e.preventDefault();
+    // let isAuthenticated=false;
+    // if(isAuthenticated){
+    //     navigate('/home')
+    // }else{
+    //     navigate('/register')
+    // }
 }
-    useEffect(()=>{
-        console.log(err)
-    }, [err])
     return (
         <div className="form-container">
             <form className="form">
@@ -69,9 +73,8 @@ const handleClick=(event)=>{
                 <div className="form-element">
                     <label>Password</label>
                     <input type="password" value={password} onChange={handlePassword}/>
-                    <span>{err?err:''}</span>
                 </div>
-                <button type="submit" onClick={event=>handleClick(event)}>Register</button>
+                <button type="submit" onClick={event=>handleClick(event)}>Login</button>
             </form>
         </div>
     )

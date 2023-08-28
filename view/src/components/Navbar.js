@@ -8,13 +8,13 @@ function Navbar(){
         <>
           <navbar className='navbar'>
             <div className='leftnavelements'>
+                <a href='/home'>Home</a>
                 <a href='/products'>Products</a>
                 <a href='/orders'>Orders</a>
-                <a href='/users'>Users</a>
             </div>
             <div className='rightnavelements'>
                 <a href='/register'>Sign Up</a>
-                <a href='/register'>Sign In</a>
+                <a href='/login'>Sign In</a>
             </div>
             
           </navbar>

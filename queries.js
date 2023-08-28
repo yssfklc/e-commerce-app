@@ -77,6 +77,16 @@ const getProducts = (request, response)=>{
         
     })
 };
+const getProductsById = (request, response)=>{
+    const {username} = request.body;
+    db.pool.query('SELECT * FROM products WHERE username=$1 ORDER BY id ASC', [username], (error, results)=>{
+        if(error){
+            throw error
+        }
+        response.status(200).json(results.rows)
+        
+    })
+};
 
 const createProduct = (request, response)=>{
     const {name, description, price} = request.body
@@ -148,6 +158,7 @@ module.exports={
     getUsers,
     getOrders,
     getProducts,
+    getProductsById,
     createProduct,
     deleteProduct,
     updateProduct,

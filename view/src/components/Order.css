@@ -1,0 +1,34 @@
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.flex-space-evenly{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.order-component{
+    
+}
+.order-element{
+    padding: 8px;
+    border-radius: 1rem;
+    border: 2px solid #526EB6;
+    margin-bottom: 1rem;
+}
+.order-name{
+    
+}
+.order-name img{
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    margin-right: 2rem;
+}
+.order-date{
+    
+}
+.order-price{
+    
+}

@@ -4,14 +4,14 @@ const bodyParser=require('body-parser');
 const passport = require("passport");
 
 const session = require("express-session");
-const port = 3000;
+const port = process.env.PORT || 8000;
 const dbquery= require('./queries.js');
 const passportRouter= require('./passport.js'); 
-const db = require('./clientdb.js');
-
+const cors = require('cors');
 
 
 app.use(express.json());
+app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 
 app.use(
@@ -19,7 +19,8 @@ app.use(
     secret: "f4z4gs$Gcg",
     cookie: { maxAge: 300000000, secure: false },
     saveUninitialized: false,
-    resave: false
+    resave: false,
+    
   })
 );
   
@@ -30,9 +31,9 @@ app.use('/', passportRouter);
 
 
 
-app.get('/login', function(req, res, next) {
-  res.send('Welcome to the login page');
-});
+// app.get('/login', function(req, res, next) {
+//   res.send({"res":'Welcome to the login page'});
+// });
 
 app.post('/login', passport.authenticate('local', {
   successRedirect: '/home',
