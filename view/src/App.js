@@ -5,6 +5,9 @@ import Register from './components/Register';
 import Login from './components/Login';
 import Home from './components/Home';
 import Orders from './components/Orders';
+import Order from './components/Order';
+import Product from './components/Product';
+import Basket from './components/Basket';
 import { RouterProvider, createBrowserRouter, createRoutesFromElements, Route} from 'react-router-dom';
 
 function App() {
@@ -13,7 +16,10 @@ function App() {
       <Route path='register' element={<Register/>} />
       <Route path='login' element={<Login/>} />
       <Route path='home' element={<Home/>} />
+      <Route path='products' element={<Product/>} />
       <Route path='orders' element={<Orders/>} />
+      <Route path='orders/:orderId' element={<Order/>} />
+      <Route path='basket' element={<Basket/>} />
     </Route>
   ) 
   );

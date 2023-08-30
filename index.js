@@ -52,6 +52,7 @@ app.get('/', (req, res, next)=>{
 
 
 app.get('/orders', dbquery.getOrders);
+app.post('/ordersbyid', dbquery.getOrdersById);
 app.post('/orders', dbquery.createOrders);
 app.delete("/orders/:id", dbquery.deleteOrder);
 app.put("/orders", dbquery.updateOrder);

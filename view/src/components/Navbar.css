@@ -34,3 +34,9 @@
     font-size: 1.3rem;
     padding-right: 1rem;
 }
+.navbar .activeNavLink{
+    color: #091f54;
+    font-size: 1.4rem;
+    text-decoration-line: underline;
+
+}

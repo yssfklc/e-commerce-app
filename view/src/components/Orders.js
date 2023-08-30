@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './Order.css';
+import { Link } from 'react-router-dom';
+
 function Orders() {
   const [orders, setOrders]=useState([]);
 
@@ -29,6 +31,7 @@ function Orders() {
     {orders.map((item)=>{
       return(
         <div className='order-container'>
+          <Link to={`${item.id}`}>
             <div className='order-component '>
               <div className='order-element flex-space-evenly'>
                 <div className='order-name flex-center'>
@@ -43,6 +46,7 @@ function Orders() {
                 </div>
               </div>
             </div>
+          </Link>
         </div>
     )
     })}

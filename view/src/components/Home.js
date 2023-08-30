@@ -21,20 +21,6 @@ function Home() {
      
   };
 
-  const searchProduct=async(query)=>{
-    const url = '';
-
-    try{  
-      const response = await fetch('');
-      if(response.ok){
-        const data=response.json();
-        console.log(data);
-        return data;
-      }
-    }catch(err){
-      console.log(err)
-    }
-  }
   // queries ends
   const handleSearch=(e)=>{
     e.preventDefault();

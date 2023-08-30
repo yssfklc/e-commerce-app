@@ -20,6 +20,18 @@ const getUsers = (request, response)=>{
 
 
 // Orders Queries
+const getOrdersById = (request, response)=>{
+    const {id} = request.body;
+    db.pool.query('SELECT * FROM orders_products JOIN products ON product_id=id WHERE orders_products.order_id=$1', [id], (error, results)=>{
+        if(error){
+            throw error
+        }
+        
+        response.status(200).json(results.rows)
+        
+        
+    })
+};
 const getOrders = (request, response)=>{
     db.pool.query('SELECT * FROM orders ORDER BY id ASC', (error, results)=>{
         if(error){
@@ -31,7 +43,7 @@ const getOrders = (request, response)=>{
 };
 
 const createOrders = (request, response)=>{
-    const {user_id} = request.body
+    const {user_id, product_id} = request.body
     let lastOrderid=null
     db.pool.query('SELECT id FROM orders ORDER BY id DESC LIMIT 1', (error, results)=>{
         if(error){
@@ -42,12 +54,19 @@ const createOrders = (request, response)=>{
             if(error){
                 throw error
             }
+            console.log(product_id);
+            product_id.map((product)=>{
+                db.pool.query('INSERT INTO orders_products VALUES ($1, $2) RETURNING *', [lastOrderid, product], (error, results)=>{
+                    if(error){
+                        throw error
+                    }
+                });
+            })
             response.status(201).json(results.rows);
         });
     });
 }
 const deleteOrder = (request, response)=>{
-    console.log(request.params)
     const id=request.params.id;
     db.pool.query('DELETE FROM orders WHERE id=$1', [id], (error, results)=>{
         if(error){
@@ -157,6 +176,7 @@ const createCarts = (request, response)=>{
 module.exports={
     getUsers,
     getOrders,
+    getOrdersById,
     getProducts,
     getProductsById,
     createProduct,

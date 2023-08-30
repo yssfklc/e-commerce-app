@@ -1,3 +1,14 @@
+  .flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .flex-space-evenly{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
   .playlist-container {
     width: 300px;
     background-color: #000
@@ -55,9 +66,19 @@
     padding: 0.3rem 0;
     box-shadow:0px 3px 2px 0px #ccc;
   }
+  .btn-1{
+    border-radius: 0.5rem; ;
+    background-color: #0d6f88;
+    color: #fff;
+    margin-top: 1rem;
+    border: none;
+    padding: 1rem 2rem;
+    box-shadow:0px 3px 2px 0px #ccc;
+  }
   /*searchform*/
   .search-form input{
     height: 1.3rem;
+    width: 20rem;
     margin-bottom: 1rem;
     margin-right: 0.5rem;
     border-radius: 0.5rem;
