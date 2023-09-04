@@ -1,10 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import './Order.css';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux";
+import { isLoggedin } from "../features/sessionSlice";
+import { useNavigate } from 'react-router-dom';
 
 function Orders() {
   const [orders, setOrders]=useState([]);
+  const isLogin=useSelector(isLoggedin);
+  const navigate = useNavigate();
 
+  if(!isLogin){
+    navigate('/login');
+  }
   //Get orders
   const getOrders=async()=>{
     try{
@@ -17,6 +25,12 @@ function Orders() {
     }catch(error){
       console.log(error)
     }
+  }
+  //format Date
+  const formatDate=(item)=>{
+      const date = new Date(item.order_date).toDateString();
+      return date
+    
   }
 
   useEffect(()=>{
@@ -36,13 +50,13 @@ function Orders() {
               <div className='order-element flex-space-evenly'>
                 <div className='order-name flex-center'>
                   <img src='https://picsum.photos/200'/>
-                  <h3> My First Order</h3>
+                  {/* <h3> {(item.order_date)}</h3> */}
                 </div>
                 <div className='order-date flex-center'>
-                  <span>22.09.1998</span>
+                  <span>{formatDate(item)}</span>
                 </div>
                 <div className='order-price flex-center'>
-                  <span>Price : <strong>$ 255.43</strong></span>
+                  <span>Price : <strong>$ {item.total_price}</strong></span>
                 </div>
               </div>
             </div>

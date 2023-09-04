@@ -43,14 +43,14 @@ const getOrders = (request, response)=>{
 };
 
 const createOrders = (request, response)=>{
-    const {user_id, product_id} = request.body
+    const {user_id, product_id, date, price} = request.body
     let lastOrderid=null
     db.pool.query('SELECT id FROM orders ORDER BY id DESC LIMIT 1', (error, results)=>{
         if(error){
             throw error
         }
         lastOrderid = results.rows[0].id + 1;
-        db.pool.query('INSERT INTO orders VALUES ($1, $2) RETURNING *', [lastOrderid, user_id], (error, results)=>{
+        db.pool.query('INSERT INTO orders VALUES ($1, $2, $3, $4, $5) RETURNING *', [lastOrderid, user_id, 'test', date, price], (error, results)=>{
             if(error){
                 throw error
             }
@@ -97,8 +97,8 @@ const getProducts = (request, response)=>{
     })
 };
 const getProductsById = (request, response)=>{
-    const {username} = request.body;
-    db.pool.query('SELECT * FROM products WHERE username=$1 ORDER BY id ASC', [username], (error, results)=>{
+    const {id} = request.body;
+    db.pool.query('SELECT * FROM products WHERE id=$1', [id], (error, results)=>{
         if(error){
             throw error
         }

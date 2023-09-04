@@ -1,36 +1,34 @@
 import React, { useEffect, useState } from 'react';
 import './Home.css';
 import { Provider, useSelector, useDispatch } from 'react-redux';
-import {selectAllBasket, removeFromBasket} from '../features/addBasketSlice';
+import {selectAllBasket, removeFromBasket, selectBasketPrice} from '../features/addBasketSlice';
 import { useNavigate } from 'react-router-dom';
 
 
 
 function Basket() {
-//   const [products, setProducts]=useState([]);
   const navigate = useNavigate();
-  const [chart, setChart]=useState([]);
-  const [searchquery, setSearchquery]=useState('');
   const dispatch = useDispatch();
-  const basket = useSelector(selectAllBasket)
-
+  const basket = useSelector(selectAllBasket);
+  const totalPrice=useSelector(selectBasketPrice);
+  const date = new Date().toDateString()
+  console.log(date);
 
   const removeElement=((e)=>{
     e.preventDefault();
     basket.map((item)=>{
       if(item.id==e.target.value){
-        console.log('lale');
         dispatch(removeFromBasket(item))
       }});
   })
   const createOrder =((e)=>{
     e.preventDefault();
-    console.log(basket);
     const product_id = (basket.map(item=>item.id));
-    console.log(product_id);
     const order_obj={
       user_id:1,
-      product_id:product_id
+      product_id:product_id,
+      date:date,
+      price:totalPrice
     }
     const createOrder=async(order_obj)=>{
       try{
@@ -45,7 +43,6 @@ function Basket() {
         });
         if(response.ok){
           const data=await response.json();
-          console.log(data);
           navigate('/orders');
         }
       }catch(err){
@@ -60,7 +57,7 @@ function Basket() {
   
   
   useEffect( ()=>{
-  
+    
     
   }, [])
   
@@ -82,6 +79,7 @@ function Basket() {
           })}
           </div>
           <button type='submit' className='btn-1' onClick={(e)=>createOrder(e)} >Create Order</button>
+          <span>Total price : {totalPrice}</span>
     </div>
   )
 }

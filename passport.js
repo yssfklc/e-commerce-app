@@ -10,10 +10,6 @@ const db = require('./clientdb.js');
 
 
 //login
-passport.serializeUser((user, done) => {
-    done(null, user.rows[0].id);
-  });
-  
 passport.deserializeUser((id, done) => {
     db.pool.query('SELECT * FROM users WHERE id=$1', [id], function (err, user) {
       if (err) {
@@ -35,7 +31,6 @@ passport.use(new LocalStrategy(function verify(username, password, done) {
     if (!matchedPassword) {
         return done(null, false, { message: 'Incorrect username or password.' });
     }
-       console.log('login başarılı');
        return done(null, user);
     });
 }));
@@ -45,7 +40,6 @@ passportRouter.post('/register', async (request, response)=>{
         const {username, password} = request.body;
         try {
             const user = await db.pool.query('SELECT * FROM users WHERE username=$1', [username])
-            console.log(user.rows[0]);
             if(user.rows[0]){
                 console.log('User already exist');
                 return response.redirect('login');

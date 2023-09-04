@@ -91,3 +91,6 @@
     border-radius: 0.5rem;
     background-color: #526EB6;
   }
+  button:hover{
+    cursor: pointer;
+  }

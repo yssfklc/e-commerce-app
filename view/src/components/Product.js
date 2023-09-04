@@ -1,79 +1,74 @@
 import React, { useEffect, useState } from 'react';
-import './Home.css';
-import { Provider, useSelector, useDispatch } from 'react-redux';
-import { selectAllProducts, loadAllProducts } from '../features/addProductSlice';
+import { Link, useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { addToBasket } from '../features/addBasketSlice';
+import './Product.css';
 
 function Product() {
-//   const [products, setProducts]=useState([]);
-  const [filteredproducts, setFilteredproducts]=useState([]);
-  const [chart, setChart]=useState([]);
-  const [searchquery, setSearchquery]=useState('');
-  const dispatch = useDispatch();
-  const temporary = useSelector(selectAllProducts);
-  const products = [];
-  
-  // queries start
-  temporary.map(item=>{
-    let count=0;
-    products.map(product=>{
-      if(product.id===item.id){
-        count++
-      }
-    })
-    if(count===0){
-      products.push(item);
+    const {productId} = useParams();
+    const [product, setProduct]= useState([]);
+    const dispatch = useDispatch();
+console.log(productId);
+const getProductsById = async(productId)=>{
+    try{
+        const response = await fetch('http://localhost:8000/productsbyid',{
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*"
+                // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: JSON.stringify({
+                id: productId
+            })
+        }
+        )
+        if(response.ok){
+            const data = await response.json();
+            setProduct(data);
+            console.log(data);
+        }
+    }catch(error){
+        console.log(error);
     }
-  })
-  console.log(products);
-  
-  const handleSearch=(e)=>{
+}
+
+const handleBasket=(e)=>{
     e.preventDefault();
-    setSearchquery(e.target.value)
-    setFilteredproducts(products.filter((item)=>item.name.toLowerCase().includes(searchquery.toLowerCase())));
-  }
-  
-  const handleBasket=(e)=>{
-    e.preventDefault();
-    products.map(item=>{
+    product.map(item=>{
       if(item.id==e.target.value){
         dispatch(addToBasket(item))
       }});
 
   }
-  
-  useEffect( ()=>{
-    dispatch(loadAllProducts());
-  }, [])
-  
+
+useEffect(()=>{
+    getProductsById(productId)
+}, [])
   return (
-    <div className='my-list-container'>
-          <h2>Product List</h2> 
-          <form className='search-form' placeholder='Type To Search A Product'>
-            <input onChange={e=>handleSearch(e)}/>
-          </form>
-          <div className='my-list'>
-          { searchquery===''? products.map((item)=>{
-           return (<div className='card' >
-               <img src="https://picsum.photos/200"/>
-               <div className='flex-space-evenly'>
-                <h2>{item.name}</h2>
-                <span>${item.price}</span>
-               </div>
-              <p>{item.description}</p>
-              <button type='submit' value={item.id} onClick={(e)=>handleBasket(e)} >Add To Basket</button>
-            </div>)
-          }):filteredproducts.map((item)=>{
-            return (<div className='card' >
-                <img src="https://picsum.photos/200"/>
-               <h2>{item.name}</h2>
-               <p>{item.description}</p>
-               <button type='submit' value={chart} onClick={(e)=>handleBasket(e)} >Add To Basket</button>
-             </div>)
-           })}
-          </div>
+    <div>
+      {product.map((item)=>{
+        return(
+    <div className='flex-left product-container'>
+        <div className='product-image'>
+            <img src='https://picsum.photos/400/800
+'/>
+        </div>
+        <div className='product-details'>
+            <h2>{item.name}</h2>
+            <p>{item.long_description}</p>
+            <div className='flex-center'>
+                <div className='price-basket'>
+                    <span className='price'>${item.price}</span><button value={item.id} className='basket' onClick={(e)=>handleBasket(e)}>SEPETE EKLE</button>
+                </div>
+            </div>
+        </div>
     </div>
+    )
+    })}
+    </div>
+    
   )
 }
 
-export default Product;
+export default Product

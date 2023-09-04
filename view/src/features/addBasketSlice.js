@@ -16,9 +16,13 @@ const addBasketSlice= createSlice({
 
 
 export const selectAllBasket = (state)=>{
-    console.log(`State.basket: ${state.basket}`)
     return state.basket
 };
+export const selectBasketPrice = (state)=>{
+    let count=0;
+    state.basket.map(item=>count+=Number(item.price));
+    return count.toFixed(2);
+}
 
 export const {
     addToBasket,
