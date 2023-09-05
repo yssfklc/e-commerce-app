@@ -34,7 +34,7 @@ https://github.com/yssfklc/e-commerce-app/assets/121329421/a2253cb1-db8d-49e5-b8
   1. Register/Login
 ![image](https://github.com/yssfklc/e-commerce-app/assets/121329421/50968348-5dd2-4327-9fa3-acb2e969c50c)
   2. Products/Home Page
-![Uploading image.png…]()
+![image](https://github.com/yssfklc/e-commerce-app/assets/121329421/2d98e639-d355-497c-858c-f995ea012593)
   3. Orders Page
 ![image](https://github.com/yssfklc/e-commerce-app/assets/121329421/42e6e301-96a5-4522-9afd-7e40f6b2731b)
 
