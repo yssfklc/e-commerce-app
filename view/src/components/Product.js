@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addToBasket } from '../features/addBasketSlice';
 import './Product.css';
@@ -8,7 +8,7 @@ function Product() {
     const {productId} = useParams();
     const [product, setProduct]= useState([]);
     const dispatch = useDispatch();
-console.log(productId);
+    const navigate=useNavigate();
 const getProductsById = async(productId)=>{
     try{
         const response = await fetch('http://localhost:8000/productsbyid',{
@@ -46,24 +46,29 @@ useEffect(()=>{
     getProductsById(productId)
 }, [])
   return (
-    <div>
+    <div className=''>
       {product.map((item)=>{
         return(
-    <div className='flex-left product-container'>
-        <div className='product-image'>
-            <img src='https://picsum.photos/400/800
-'/>
-        </div>
-        <div className='product-details'>
-            <h2>{item.name}</h2>
-            <p>{item.long_description}</p>
-            <div className='flex-center'>
-                <div className='price-basket'>
-                    <span className='price'>${item.price}</span><button value={item.id} className='basket' onClick={(e)=>handleBasket(e)}>SEPETE EKLE</button>
+        <div className='flex-center-column product-container'>
+            <button className='go-back' onClick={() => navigate(-1)}>
+                    Go Back
+            </button>
+            <div className='flex-left '>
+                <div className='product-image'>
+                    <img src='https://picsum.photos/400/500
+        '/>
+                </div>
+                <div className='product-details'>
+                    <h2>{item.name}</h2>
+                    <p>{item.long_description}</p>
+                    <div className='flex-center'>
+                        <div className='price-basket'>
+                            <span className='price'>${item.price}</span><button value={item.id} className='basket' onClick={(e)=>handleBasket(e)}>SEPETE EKLE</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     )
     })}
     </div>

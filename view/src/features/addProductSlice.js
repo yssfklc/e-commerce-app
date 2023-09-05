@@ -45,13 +45,15 @@ const addProductSlice = createSlice({
         .addCase(loadAllProducts.fulfilled, (state, action) => {
             state.isLoading = false;
             state.hasError = false;
-            action.payload.map((item) => {
-                if(!state.recipes.includes(item) ){
-                    state.recipes.push(item);
-                }else{
-                    return
-                }
-            });
+            if(action.payload){
+              action.payload.map((item) => {
+                  if(!state.recipes.includes(item) ){
+                      state.recipes.push(item);
+                  }else{
+                      return
+                  }
+              });
+            }
         })
         .addCase(loadAllProducts.rejected, (state, action) => {
             state.isLoading = false;

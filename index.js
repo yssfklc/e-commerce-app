@@ -52,9 +52,22 @@ const ensureAuthentication = (req, res, next)=> {
 }
 
 app.get("/logout", (req, res) => {
-  req.logout();
-  res.redirect("/login");
+  req.session.user = null
+  
 
+    // regenerate the session, which is good practice to help
+    // guard against forms of session fixation
+    req.session.destroy(function (err) {
+      if (err) next(err)
+      for (const key in store.sessions) {
+        delete store.sessions[key];
+      }
+      console.log(store.sessions)
+      res.redirect('/')
+    })
+  
+  // req.logout();
+  // res.redirect("/login");
 });
 
 app.get('/login', (req, res, next)=>{
@@ -72,7 +85,7 @@ app.get('/home', function(req, res, next) {
 });
 
 app.get('/', (req, res, next)=>{
-  res.send('Selam hoş geldin')
+  res.send('successful')
 });
 
 
@@ -83,7 +96,7 @@ app.post('/ordersbyid', dbquery.getOrdersById);
 app.post('/orders', dbquery.createOrders);
 app.delete("/orders/:id", dbquery.deleteOrder);
 app.put("/orders", dbquery.updateOrder);
-app.get('/products', ensureAuthentication, dbquery.getProducts);
+app.get('/products', dbquery.getProducts);
 app.post('/productsbyid', dbquery.getProductsById);
 app.post('/products', dbquery.createProduct);
 app.delete('/products/:id', dbquery.deleteProduct);

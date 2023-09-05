@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './Home.css';
 import { Provider, useSelector, useDispatch } from 'react-redux';
-import {selectAllBasket, removeFromBasket, selectBasketPrice} from '../features/addBasketSlice';
+import {selectAllBasket, removeFromBasket, selectBasketPrice, removeAllFromBasket} from '../features/addBasketSlice';
+import { isLoggedin} from '../features/sessionSlice';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -11,6 +12,7 @@ function Basket() {
   const dispatch = useDispatch();
   const basket = useSelector(selectAllBasket);
   const totalPrice=useSelector(selectBasketPrice);
+  const isLogin=useSelector(isLoggedin);
   const date = new Date().toDateString()
   console.log(date);
 
@@ -57,7 +59,10 @@ function Basket() {
   
   
   useEffect( ()=>{
-    
+    // if(!isLogin){
+    //   dispatch(removeAllFromBasket());
+    //   console.log('lale')
+    // }
     
   }, [])
   

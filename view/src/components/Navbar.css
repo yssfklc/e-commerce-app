@@ -34,9 +34,18 @@
     font-size: 1.3rem;
     padding-right: 1rem;
 }
+.rightnavelements button{
+    text-decoration: none;
+    margin-right: 7px;
+    color: #526EB6;
+    font-size: 1.3rem;
+    padding-right: 1rem;
+    border: none;
+    background-color: #fff;
+}
 .navbar .activeNavLink{
     color: #091f54;
     font-size: 1.4rem;
-    text-decoration-line: underline;
+    /* text-decoration-line: underline; */
 
 }

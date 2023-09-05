@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import './Register.css';
 import { useNavigate } from 'react-router-dom';
 import personlogo from '../img/person.svg';
@@ -30,6 +30,7 @@ const handleClick=(event)=>{
         password:password
     } 
     dispatch(tryLogin(data));
+    console.log(isLogin)
     if(isLogin){
         navigate('/home');
     }else{
@@ -72,6 +73,13 @@ const handleClick=(event)=>{
     //     navigate('/register')
     // }
 }
+useEffect(()=>{
+    if(isLogin){
+        navigate('/home');
+    }else{
+        navigate('/login');
+    }
+}, [isLogin])
     return (
         <div className="form-container">
             <form className="form">

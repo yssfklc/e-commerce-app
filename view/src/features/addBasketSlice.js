@@ -10,6 +10,10 @@ const addBasketSlice= createSlice({
         },
         removeFromBasket:(state, action)=>{
             return state = state.filter(recipe => recipe.id !== action.payload.id);
+        },
+        removeAllFromBasket:(state, action)=>{
+            console.log('test');
+            return state = [];
         }
     }
 });
@@ -26,6 +30,7 @@ export const selectBasketPrice = (state)=>{
 
 export const {
     addToBasket,
-    removeFromBasket
+    removeFromBasket,
+    removeAllFromBasket
 } = addBasketSlice.actions;
 export default addBasketSlice.reducer;

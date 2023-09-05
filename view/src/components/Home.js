@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import './Home.css';
+import banner1 from '../img/banner1.svg';
+import banner2 from '../img/banner2.svg';
+import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { addToBasket } from '../features/addBasketSlice';
 
 function Home() {
   const [products, setProducts]=useState([]);
-  const [filteredproducts, setFilteredproducts]=useState([]);
-  const [chart, setChart]=useState([]);
-  const [searchquery, setSearchquery]=useState('');
+  const dispatch = useDispatch();
+
   // queries start
   const getOrder = async()=>{
     try{
@@ -22,11 +26,12 @@ function Home() {
   };
 
   // queries ends
-  const handleSearch=(e)=>{
+  const handleBasket=(e)=>{
     e.preventDefault();
-    setFilteredproducts(products.filter((item)=>item.name.toLowerCase().includes(searchquery.toLowerCase())));
-  }
-  const filterProducts = () =>{
+    products.map(item=>{
+      if(item.id==e.target.value){
+        dispatch(addToBasket(item))
+      }});
 
   }
   
@@ -36,29 +41,27 @@ function Home() {
   
   return (
     <div className='my-list-container'>
+          <img src={banner1} className='banner1'/>
+          <img src={banner2} className='banner2'/>
           <h2>Product List</h2> 
-          <form className='search-form'>
-            <input onChange={e=>setSearchquery(e.target.value)}/>
-            <button onClick={e=>handleSearch(e)}>Search</button>
-          </form>
+          
           <div className='my-list'>
             
-          { searchquery==''? products.map((item)=>{
+          {  products.slice(0, 5).map((item)=>{
            return (<div className='card' >
-               <img src="https://picsum.photos/200"/>
-              <h2>{item.name}</h2>
-              <p>{item.description}</p>
-              <button type='submit' value={chart} onClick={(e)=>setChart(e.target.value)} >Add To Basket</button>
-            </div>)
-          }):filteredproducts.map((item)=>{
-            return (<div className='card' >
-                <img src="https://picsum.photos/200"/>
+           <img src={item.image} />
+           <div className='flex-space-evenly'>
+             <Link to={`${item.id}`} className='product-link'>
                <h2>{item.name}</h2>
-               <p>{item.description}</p>
-               <button type='submit' value={chart} onClick={(e)=>setChart(e.target.value)} >Add To Basket</button>
-             </div>)
-           })}
+             </Link>
+             <span>${item.price}</span>
+           </div>
+           <p>{item.description}</p>
+         <button type='submit' value={item.id} onClick={(e)=>handleBasket(e)} >Add To Basket</button>
+            </div>)
+          })}
           </div>
+          <Link to='/products' className='all-products'>All Products</Link>
        
           {/* <button type='submit' onClick={(e)=>submitList(e)} >Save My List</button> */}
     </div>

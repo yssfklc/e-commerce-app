@@ -3,16 +3,15 @@ import './Order.css';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { isLoggedin } from "../features/sessionSlice";
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 function Orders() {
   const [orders, setOrders]=useState([]);
   const isLogin=useSelector(isLoggedin);
   const navigate = useNavigate();
 
-  if(!isLogin){
-    navigate('/login');
-  }
+  
+  
   //Get orders
   const getOrders=async()=>{
     try{
@@ -34,6 +33,10 @@ function Orders() {
   }
 
   useEffect(()=>{
+    if(!isLogin){
+      console.log(isLogin);
+      navigate('/login');
+    }
     getOrders()
   }, [])
   return (

@@ -3,6 +3,20 @@
     align-items: center;
     justify-content: center;
   }
+  .flex-center-column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  .flex-center-column .go-back{
+    margin-left:2rem ;
+    margin-bottom: 2rem;
+    background-color: #8798C5;
+    border:0;
+    padding: 0.3rem 0.8rem;
+    border-radius: 1rem;
+  }
 .flex-space-evenly{
     display: flex;
     align-items: center;

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './Home.css';
 import { Provider, useSelector, useDispatch } from 'react-redux';
-import { selectAllProducts, loadAllProducts } from '../features/addProductSlice';
 import { addToBasket } from '../features/addBasketSlice';
+import { selectAllProducts, loadAllProducts } from '../features/addProductSlice';
 import {Link} from 'react-router-dom';
 import { isLoggedin } from "../features/sessionSlice";
 import { useNavigate } from 'react-router-dom';
@@ -17,26 +17,25 @@ function Products() {
   const dispatch = useDispatch();
   const temporary = useSelector(selectAllProducts);
   const products = [];
-  const isLogin=useSelector(isLoggedin);
+  // const isLogin=useSelector(isLoggedin);
   const navigate = useNavigate();
 
-  if(!isLogin){
-    navigate('/login');
-  }
+  
   
   // queries start
-  temporary.map(item=>{
-    let count=0;
-    products.map(product=>{
-      if(product.id===item.id){
-        count++
+    console.log('lale');
+    temporary.map(item=>{
+      let count=0;
+      products.map(product=>{
+        if(product.id===item.id){
+          count++
+        }
+      })
+      if(count===0){
+        products.push(item);
       }
     })
-    if(count===0){
-      products.push(item);
-    }
-  })
-  console.log(products);
+
   
   const handleSearch=(e)=>{
     e.preventDefault();
@@ -54,6 +53,9 @@ const handleBasket=(e)=>{
   }
   
   useEffect( ()=>{
+    // if(!isLogin){
+    //   navigate('/login');
+    // }
     dispatch(loadAllProducts());
   }, [])
   
@@ -66,9 +68,9 @@ const handleBasket=(e)=>{
           <div className='my-list'>
           { searchquery===''? products.map((item)=>{
            return (<div className='card' >
-                <img src={"https://picsum.photos/200/200?random=" + (Number(item.id)-100).toString()} />
+                <img src={item.image} />
                 <div className='flex-space-evenly'>
-                  <Link to={`${item.id}`}>
+                  <Link to={`${item.id}`} className='product-link'>
                     <h2>{item.name}</h2>
                   </Link>
                   <span>${item.price}</span>

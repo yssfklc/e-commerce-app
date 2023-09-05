@@ -6,6 +6,7 @@ const url='http://localhost:8000/login';
 
 
 export const tryLogin=createAsyncThunk('users/tryLogin', async(data)=>{
+
         try{
             const response = await fetch(url, {
                 method: 'POST',
@@ -29,7 +30,9 @@ export const tryLogin=createAsyncThunk('users/tryLogin', async(data)=>{
             console.log(error);
         }
 
-})
+});
+
+
 
 const addSessionSlice=createSlice({
     name:'users',
@@ -39,7 +42,12 @@ const addSessionSlice=createSlice({
         isLoading: false,
         hasError: false
     },
-    reducres:{},
+    reducers:{
+        logout(state){
+            state.user={};
+            state.isLoggedin=false;
+        }
+    },
     extraReducers: (builder)=>{
         builder
         .addCase(tryLogin.pending, (state, action) => {
@@ -51,18 +59,17 @@ const addSessionSlice=createSlice({
             state.hasError = false;
             state.user=action.payload;
             state.isLoggedin=true;
-            console.log({user:state.user, isLoggedin:state.isLoggedin});
-            // Cookies.set('auth',action.payload.sesionId, { expirationDate:action.payload.sessionInfo.cookie.expires });
         })
         .addCase(tryLogin.rejected, (state, action) => {
             state.isLoading = false;
             state.hasError = true;
         });
-    }
+    },
+
 })
 
 export const isLoggedin=(state=>state.users.isLoggedin);
 export const selectCurrentUser=(state=>state.users.user);
-export const {} = addSessionSlice.actions;
+export const {logout} = addSessionSlice.actions;
 
 export default addSessionSlice.reducer;
