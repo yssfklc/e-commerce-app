@@ -1,4 +1,4 @@
-# e-commerce-app full-stack PERN app
+# E-commerce-app full-stack PERN app
 Creating a backend project for an e-commerce app. 
   - Express.js is used to create api paths and requests.
   - For login passport.js and bcrypt library is used.
@@ -25,14 +25,22 @@ Creating a backend project for an e-commerce app.
 ### Next Version Updates
   - Fix XXS, CSRF vulnarabilitys by sanitization.
   - Add authentication based access.
-  - Design and develop frontend react project.
+  - Add profile edit
+  - Add footer
+  - Add third party Authentication
+#### Video From The App
+https://github.com/yssfklc/e-commerce-app/assets/121329421/a2253cb1-db8d-49e5-b829-641193fd8c42
 #### Frontend Pictures
   1. Register/Login
-![image](https://github.com/yssfklc/e-commerce-app/assets/121329421/f28d296d-be3b-409e-ab27-e657630fca94)
+![image](https://github.com/yssfklc/e-commerce-app/assets/121329421/50968348-5dd2-4327-9fa3-acb2e969c50c)
   2. Products/Home Page
-![image](https://github.com/yssfklc/e-commerce-app/assets/121329421/db0045aa-d696-4d72-baef-bc4be59e707b)
+![Uploading image.png…]()
   3. Orders Page
 ![image](https://github.com/yssfklc/e-commerce-app/assets/121329421/42e6e301-96a5-4522-9afd-7e40f6b2731b)
+
+
+
+
 
 
 
