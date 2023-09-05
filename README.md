@@ -35,6 +35,4 @@ Creating a backend project for an e-commerce app.
 ![image](https://github.com/yssfklc/e-commerce-app/assets/121329421/42e6e301-96a5-4522-9afd-7e40f6b2731b)
 
 
-https://github.com/yssfklc/e-commerce-app/assets/121329421/05c06c41-7c30-4043-92c2-be941ecb8d43
-
 
