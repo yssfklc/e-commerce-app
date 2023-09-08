@@ -73,7 +73,7 @@ function Basket() {
           <div className='my-list'>
           { basket.map((item)=>{
            return (<div className='card' >
-               <img src="https://picsum.photos/200"/>
+               <img src={item.image}/>
                <div className='flex-space-evenly'>
                 <h2>{item.name}</h2>
                 <span>${item.price}</span>

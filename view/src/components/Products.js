@@ -80,7 +80,7 @@ const handleBasket=(e)=>{
             </div>)
           }):filteredproducts.map((item)=>{
             return (<div className='card' >
-                  <img src="https://picsum.photos/200"/>
+                  <img src={item.image}/>
                   <Link to={`${item.id}`}>
                     <h2>{item.name}</h2>
                   </Link>

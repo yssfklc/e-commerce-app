@@ -55,8 +55,7 @@ useEffect(()=>{
             </button>
             <div className='flex-left '>
                 <div className='product-image'>
-                    <img src='https://picsum.photos/400/500
-        '/>
+                    <img src={item.image}/>
                 </div>
                 <div className='product-details'>
                     <h2>{item.name}</h2>

@@ -39,7 +39,9 @@
     padding: 0 2rem;
 }
 .product-image img{
-
+    width: 400px;
+    height: 500px;
+    object-fit: cover;
     border-radius: 1rem;
 }
 .product-details{
