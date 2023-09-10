@@ -1,4 +1,6 @@
 const db= require('./clientdb.js');
+const session = require("express-session");
+const store = require('./index.js')
 
 
 
@@ -33,7 +35,7 @@ const getOrdersById = (request, response)=>{
     })
 };
 const getOrders = (request, response)=>{
-    db.pool.query('SELECT * FROM orders ORDER BY id ASC', (error, results)=>{
+    db.pool.query("SELECT orders.id,	orders.user_id,	orders.order_name,	orders.order_date,	orders.total_price FROM orders JOIN users ON orders.user_id=users.id WHERE users.id=$1", [request.user_id], (error, results)=>{
         if(error){
             throw error
         }
@@ -43,7 +45,7 @@ const getOrders = (request, response)=>{
 };
 
 const createOrders = (request, response)=>{
-    const {user_id, product_id, date, price} = request.body
+    const {user_id, product_id, date, price} = request.body;
     let lastOrderid=null
     db.pool.query('SELECT id FROM orders ORDER BY id DESC LIMIT 1', (error, results)=>{
         if(error){

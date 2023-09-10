@@ -12,8 +12,8 @@ const navigate = useNavigate();
 
 
 const handleUsername=(e)=> {
-    setUserName(e.target.value);
     console.log(userName);
+    setUserName(e.target.value);
   };
   function handlePassword(e) {
     setPassword(e.target.value);
@@ -21,6 +21,9 @@ const handleUsername=(e)=> {
   }
 const handleClick=(event)=>{
     event.preventDefault();
+    if(userName==='' || password===''){
+        return setErr('Fill password and username area');
+    }
     let data ={
         username:userName,
         password:password
@@ -37,14 +40,14 @@ const handleClick=(event)=>{
                 body: JSON.stringify(data),
                 
             });
+            const res=await response.json();
             if(response.ok){
-                navigate('/home')
-            }else if(!response.ok && response.redirected){
-                console.log('lale')
-                setErr('user already exist')
+                setErr(res.message)
+                return navigate(`/${res.redirect}`)
                 
             }else{
-                setErr('try again')
+                setErr(res.message)
+                
             }
         }catch(err){
             setErr(err);
@@ -54,8 +57,7 @@ const handleClick=(event)=>{
     register(data);
 }
     useEffect(()=>{
-        console.log(err)
-    }, [err])
+    }, [])
     return (
         <div className="form-container">
             <form className="form">
@@ -64,14 +66,14 @@ const handleClick=(event)=>{
                 </div>
                 <div className="form-element">
                     <label>Username</label>
-                    <input type="text" value={userName} onChange={handleUsername}/>
+                    <input type="text" value={userName} onChange={handleUsername} required/>
                 </div>
                 <div className="form-element">
                     <label>Password</label>
-                    <input type="password" value={password} onChange={handlePassword}/>
-                    <span>{err?err:''}</span>
+                    <input type="password" value={password} onChange={handlePassword} required/>
+                    <span className="error">{err?err:''}</span>
                 </div>
-                <button type="submit" onClick={event=>handleClick(event)}>Register</button>
+                <button type="submit" onClick={event=>handleClick(event)} className="loginbutton">Register</button>
             </form>
         </div>
     )

@@ -5,8 +5,29 @@
   }
   .flex-space-evenly{
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    flex-direction: column;
+    align-items: start;
+    justify-content: left;
+  }
+  .item-head{
+    display: flex;
+    align-self: self-start;
+    justify-content: left;
+    text-decoration: none;
+    padding: 0.1rem 0.05rem ;
+    margin-bottom: 0.3rem;
+  }
+  .rating-span{
+    display: flex;
+    align-self: self-start;
+    margin: auto 0;
+    font-size: 0.7rem!important;
+  }
+  .rating{
+    align-self: self-start;
+    font-size: 0.8rem!important;
+    padding: 0.1rem 0.05rem ;
+    margin-bottom: 0.3rem;
   }
   
   .playlist-container {
@@ -34,42 +55,49 @@
     margin: 2rem;
     max-height: 400px;
   }
+  .google-icon{
+    align-self: center;
+  }
   .my-list{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     max-width: 970px;
+    align-items: center;
+    
   }
   .card{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    /* border: 1px solid #526EB6; */
     border-radius: 0.3rem;
-    padding: 0.5rem;
     margin-bottom: 1rem;
     margin-right: 1rem;
     width: 10rem;
-    height: 22rem;
+    height: 18rem;
     box-shadow:0px 5px 4px 0px #526EB6;
   }
-  .card h2{
-    font-size: 1.1rem;
+  .item-head h2{
+    font-size: 0.7rem;
+    margin: auto;
+
   }
-  .card p{
-    font-size: 0.8rem;
+  .item-head h2 span{
+    font-weight: 400;
+
   }
   .card img{
     width: 160px;
     height: 160px;
     object-fit: cover;
+    border-radius: 0.3rem 0.3rem 0 0;
     /* height: auto; */
   }
-  .card button{
+  .add-button{
     border-radius: 0.5rem; ;
     background-color: #526EB6;
     color: #fff;
-    margin-top: 1rem;
+    margin: 0 0.2rem 0.3rem;
     border: none;
     padding: 0.5rem 0;
     box-shadow:0px 3px 2px 0px #ccc;
@@ -115,4 +143,12 @@
   .product-link{
     text-decoration: none;
     color: #2e2d2d;
+  }
+  .price{
+    display: flex;
+    align-self: flex-start;
+    justify-content: left;
+    font-size: 0.8rem;
+    padding-left: 0;
+    padding-top: 0.1rem;
   }

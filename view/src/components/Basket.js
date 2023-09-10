@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import './Home.css';
 import { Provider, useSelector, useDispatch } from 'react-redux';
 import {selectAllBasket, removeFromBasket, selectBasketPrice, removeAllFromBasket} from '../features/addBasketSlice';
-import { isLoggedin} from '../features/sessionSlice';
+import { isLoggedin, selectCurrentUser} from '../features/sessionSlice';
 import { useNavigate } from 'react-router-dom';
-
+import { Rating } from '@mui/material';
+import {Link} from 'react-router-dom';
 
 
 function Basket() {
@@ -12,7 +13,7 @@ function Basket() {
   const dispatch = useDispatch();
   const basket = useSelector(selectAllBasket);
   const totalPrice=useSelector(selectBasketPrice);
-  const isLogin=useSelector(isLoggedin);
+  const currentUserId=useSelector(selectCurrentUser);
   const date = new Date().toDateString()
   console.log(date);
 
@@ -27,7 +28,7 @@ function Basket() {
     e.preventDefault();
     const product_id = (basket.map(item=>item.id));
     const order_obj={
-      user_id:1,
+      user_id:currentUserId.payload,
       product_id:product_id,
       date:date,
       price:totalPrice
@@ -45,6 +46,7 @@ function Basket() {
         });
         if(response.ok){
           const data=await response.json();
+          dispatch(removeAllFromBasket());
           navigate('/orders');
         }
       }catch(err){
@@ -59,11 +61,6 @@ function Basket() {
   
   
   useEffect( ()=>{
-    // if(!isLogin){
-    //   dispatch(removeAllFromBasket());
-    //   console.log('lale')
-    // }
-    
   }, [])
   
   return (
@@ -72,15 +69,25 @@ function Basket() {
           
           <div className='my-list'>
           { basket.map((item)=>{
-           return (<div className='card' >
-               <img src={item.image}/>
-               <div className='flex-space-evenly'>
-                <h2>{item.name}</h2>
-                <span>${item.price}</span>
-               </div>
-              <p>{item.description}</p>
-              <button type='submit' value={item.id} onClick={(e)=>removeElement(e)} >Remove From Basket</button>
-            </div>)
+           return (
+            <div className='card'>
+            <Link to={`../products/${item.id}`} className='product-link'>
+            <div >
+              <img src={item.image} />
+              <div className='flex-space-evenly'>
+                <div className='item-head'>
+                  <h2>{item.name} <span>{item.description}</span></h2>
+                  
+                </div>
+                  <span className='rating-span'>
+                  <Rating name="read-only" value={item.avg_rating} readOnly className='rating'/>{item.num_voters}
+                  </span>
+                  <span className='price'>${item.price}</span>
+              </div>
+            </div>
+              </Link>
+          <button type='submit' value={item.id} onClick={(e)=>removeElement(e)} className='add-button'>Remove From Basket</button>
+        </div>)
           })}
           </div>
           <button type='submit' className='btn-1' onClick={(e)=>createOrder(e)} >Create Order</button>

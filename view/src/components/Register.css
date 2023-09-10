@@ -31,14 +31,30 @@
     border: none;
 }
 
-.form button{
+.form .loginbutton{
     height: 2.1rem;
     width: 15rem;
     border-radius: 8px;
     color: #fff;
     background-color: #526EB6;
     border: none;
+    margin-bottom: 0.5rem;
 }
+.form .googleloginbutton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 2.1rem;
+    width: 15rem;
+    border-radius: 8px;
+    color: #fff;
+    background-color: #bb5959;
+    border: none;
+}
+.google-icon{
+    align-self: center;
+    margin-right: 1rem;
+  }
 .form-element img{
     height: 1.8rem;
     width: 1.8rem;
@@ -48,4 +64,9 @@
     align-items: center;
     justify-content: center;
     margin-bottom: 1rem;
+}
+.error{
+    color: red;
+    font-size: 0.7rem;
+
 }

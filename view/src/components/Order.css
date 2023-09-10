@@ -1,9 +1,9 @@
-.flex-center {
+.order-flex-center {
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.flex-space-evenly{
+.order-flex-space-evenly{
     display: flex;
     align-items: center;
     justify-content: space-between;

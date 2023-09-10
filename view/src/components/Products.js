@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import './Home.css';
-import { Provider, useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { addToBasket } from '../features/addBasketSlice';
 import { selectAllProducts, loadAllProducts } from '../features/addProductSlice';
 import {Link} from 'react-router-dom';
-import { isLoggedin } from "../features/sessionSlice";
 import { useNavigate } from 'react-router-dom';
+import Rating from '@mui/material/Rating';
 
 
 
@@ -53,9 +53,6 @@ const handleBasket=(e)=>{
   }
   
   useEffect( ()=>{
-    // if(!isLogin){
-    //   navigate('/login');
-    // }
     dispatch(loadAllProducts());
   }, [])
   
@@ -67,26 +64,43 @@ const handleBasket=(e)=>{
           </form>
           <div className='my-list'>
           { searchquery===''? products.map((item)=>{
-           return (<div className='card' >
-                <img src={item.image} />
-                <div className='flex-space-evenly'>
-                  <Link to={`${item.id}`} className='product-link'>
-                    <h2>{item.name}</h2>
-                  </Link>
-                  <span>${item.price}</span>
+           return (<div className='card'>
+                <Link to={`${item.id}`} className='product-link'>
+                <div >
+                  <img src={item.image} />
+                  <div className='flex-space-evenly'>
+                    <div className='item-head'>
+                      <h2>{item.name} <span>{item.description}</span></h2>
+                      
+                    </div>
+                      <span className='rating-span'>
+                      <Rating name="read-only" value={item.avg_rating} readOnly className='rating'/>{item.num_voters}
+                      </span>
+                      <span className='price'>${item.price}</span>
+                  </div>
                 </div>
-                <p>{item.description}</p>
-              <button type='submit' value={item.id} onClick={(e)=>handleBasket(e)} >Add To Basket</button>
+                  </Link>
+              <button type='submit' value={item.id} onClick={(e)=>handleBasket(e)} className='add-button'>Add To Basket</button>
             </div>)
           }):filteredproducts.map((item)=>{
-            return (<div className='card' >
-                  <img src={item.image}/>
-                  <Link to={`${item.id}`}>
-                    <h2>{item.name}</h2>
-                  </Link>
-                  <p>{item.description}</p>
-               <button type='submit' value={chart} onClick={(e)=>handleBasket(e)} >Add To Basket</button>
-             </div>)
+            return (<div className='card'>
+            <Link to={`${item.id}`} className='product-link'>
+            <div >
+              <img src={item.image} />
+              <div className='flex-space-evenly'>
+                <div className='item-head'>
+                  <h2>{item.name} <span>{item.description}</span></h2>
+                  
+                </div>
+                  <span className='rating-span'>
+                  <Rating name="read-only" value={item.avg_rating} readOnly className='rating'/>{item.num_voters}
+                  </span>
+                  <span className='price'>${item.price}</span>
+              </div>
+            </div>
+              </Link>
+          <button type='submit' value={item.id} onClick={(e)=>handleBasket(e)} className='add-button'>Add To Basket</button>
+        </div>)
            })}
           </div>
     </div>

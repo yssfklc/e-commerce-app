@@ -20,11 +20,11 @@ export const tryLogin=createAsyncThunk('users/tryLogin', async(data)=>{
             });
             // const user = await response.json();
             if(response.ok){
-                const result = await response.json();     
+                const result = await response.json();  
                 return result;
             }else{
-                // navigate('/login')
-                // navigate('/login')
+                console.log(response);
+
             }
         }catch(error){
             console.log(error);
@@ -37,14 +37,19 @@ export const tryLogin=createAsyncThunk('users/tryLogin', async(data)=>{
 const addSessionSlice=createSlice({
     name:'users',
     initialState:{
-        user: {},
+        userId:'',
         isLoggedin:false,
         isLoading: false,
         hasError: false
     },
     reducers:{
+        login(state, id){
+            console.log('check-login')
+            state.userId=id;
+            state.isLoggedin=true;
+        },
         logout(state){
-            state.user={};
+            state.userId={};
             state.isLoggedin=false;
         }
     },
@@ -57,8 +62,10 @@ const addSessionSlice=createSlice({
         .addCase(tryLogin.fulfilled, (state, action) => {
             state.isLoading = false;
             state.hasError = false;
-            state.user=action.payload;
-            state.isLoggedin=true;
+            if(action.payload.user){
+                state.userId=action.payload.user;
+                state.isLoggedin=true;
+            }
         })
         .addCase(tryLogin.rejected, (state, action) => {
             state.isLoading = false;
@@ -69,7 +76,7 @@ const addSessionSlice=createSlice({
 })
 
 export const isLoggedin=(state=>state.users.isLoggedin);
-export const selectCurrentUser=(state=>state.users.user);
-export const {logout} = addSessionSlice.actions;
+export const selectCurrentUser=(state=>state.users.userId);
+export const {login, logout} = addSessionSlice.actions;
 
 export default addSessionSlice.reducer;

@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {useParams} from 'react-router-dom';
+import { Rating } from '@mui/material';
+import {Link} from 'react-router-dom';
 
 export default function Order() {
 const {orderId} = useParams();
@@ -22,15 +24,15 @@ const getOrdersById = async(orderId)=>{
         if(response.ok){
             const data = await response.json();
             setProduct(data);
-            console.log(data);
         }
     }catch(error){
         console.log(error);
     }
 }
 
+
 useEffect(()=>{
-    getOrdersById(orderId)
+ getOrdersById(orderId)
 }, [])
   return (
     <div>
@@ -38,14 +40,23 @@ useEffect(()=>{
           <h2>Order Details</h2>      
           <div className='my-list'>
           { product.map((item)=>{
-           return (<div className='card' >
-               <img src="https://picsum.photos/200"/>
-               <div className='flex-space-evenly'>
-                <h2>{item.name}</h2>
-                <span>${item.price}</span>
+           return (<div className='card'>
+           <Link to={`../../products/${item.id}`} className='product-link'>
+           <div >
+             <img src={item.image} />
+             <div className='flex-space-evenly'>
+               <div className='item-head'>
+                 <h2>{item.name} <span>{item.description}</span></h2>
+                 
                </div>
-              <p>{item.description}</p>
-            </div>)
+                 <span className='rating-span'>
+                 <Rating name="read-only" value={item.avg_rating} readOnly className='rating'/>{item.num_voters}
+                 </span>
+                 <span className='price'>${item.price}</span>
+             </div>
+           </div>
+             </Link>
+       </div>)
           })}
           </div>
         </div>

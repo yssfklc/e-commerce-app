@@ -5,26 +5,40 @@ import banner2 from '../img/banner2.svg';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addToBasket } from '../features/addBasketSlice';
+import {getUser} from '../requests/requests';
+import Rating from '@mui/material/Rating';
+
 
 function Home() {
   const [products, setProducts]=useState([]);
   const dispatch = useDispatch();
 
   // queries start
+  // const getUser=async()=>{
+  //   try{
+  //     const response = await fetch('http://localhost:8000/home')
+  //     if(response.ok){
+  //       const result = await response.json();
+  //       dispatch(login(result.user));
+  //     }
+  //   }catch(error){
+  //     console.log(error);
+  //   }
+  // };
+
   const getOrder = async()=>{
     try{
       const response = await fetch('http://localhost:8000/products')
       if(response.ok){
         const result = await response.json();
         setProducts(result);
-        console.log(await products);
       }
     }catch(error){
       console.log(error);
     }
      
   };
-
+  getUser();
   // queries ends
   const handleBasket=(e)=>{
     e.preventDefault();
@@ -36,7 +50,8 @@ function Home() {
   }
   
   useEffect( ()=>{
-     getOrder()
+     getOrder();
+     getUser();
   }, [])
   
   return (
@@ -48,17 +63,24 @@ function Home() {
           <div className='my-list'>
             
           {  products.slice(0, 5).map((item)=>{
-           return (<div className='card' >
-           <img src={item.image} />
-           <div className='flex-space-evenly'>
-             <Link to={`${item.id}`} className='product-link'>
-               <h2>{item.name}</h2>
-             </Link>
-             <span>${item.price}</span>
+           return (<div className='card'>
+           <Link to={`../products/${item.id}`} className='product-link'>
+           <div >
+             <img src={item.image} />
+             <div className='flex-space-evenly'>
+               <div className='item-head'>
+                 <h2>{item.name} <span>{item.description}</span></h2>
+                 
+               </div>
+                 <span className='rating-span'>
+                 <Rating name="read-only" value={item.avg_rating} readOnly className='rating'/>{item.num_voters}
+                 </span>
+                 <span className='price'>${item.price}</span>
+             </div>
            </div>
-           <p>{item.description}</p>
-         <button type='submit' value={item.id} onClick={(e)=>handleBasket(e)} >Add To Basket</button>
-            </div>)
+             </Link>
+         <button type='submit' value={item.id} onClick={(e)=>handleBasket(e)} className='add-button'>Add To Basket</button>
+       </div>)
           })}
           </div>
           <Link to='/products' className='all-products'>All Products</Link>

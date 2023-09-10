@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+import Rating from '@mui/material/Rating';
 import { useDispatch } from 'react-redux';
 import { addToBasket } from '../features/addBasketSlice';
 import './Product.css';
@@ -59,10 +60,11 @@ useEffect(()=>{
                 </div>
                 <div className='product-details'>
                     <h2>{item.name}</h2>
+                     <Rating name="read-only" value={item.avg_rating} readOnly />
                     <p>{item.long_description}</p>
                     <div className='flex-center'>
                         <div className='price-basket'>
-                            <span className='price'>${item.price}</span><button value={item.id} className='basket' onClick={(e)=>handleBasket(e)}>SEPETE EKLE</button>
+                            <span className='price-1'>${item.price}</span><button value={item.id} className='basket' onClick={(e)=>handleBasket(e)}>SEPETE EKLE</button>
                         </div>
                     </div>
                 </div>

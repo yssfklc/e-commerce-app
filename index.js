@@ -1,20 +1,25 @@
 const express = require('express');
 const app = express();
-const bodyParser=require('body-parser');
+
 const passport = require("passport");
 const session = require("express-session");
 const store = new session.MemoryStore();
-
 const port = process.env.PORT || 8000;
 const dbquery= require('./queries.js');
-const passportRouter= require('./passport.js'); 
+const {passportRouter}= require('./passport.js'); 
 const cors = require('cors');
-const Cookies = require('js-cookie');
+
 
 
 
 app.use(express.json());
 app.use(cors());
+//cors policy
+// {
+//   origin:'http://localhost:3000/',
+//   methods: 'GET, POST, PUT, DELETE',
+//   credentials:true
+// }
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(__dirname + "/public"));
 
@@ -31,16 +36,13 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-passport.serializeUser((user, done) => {
-  done(null, {user_id:user.rows[0].id, username:user.rows[0].username});
-});
-
 
 
 const ensureAuthentication = (req, res, next)=> {
   // Complete the if statement below:
   if(Object.values(store.sessions).length>0 && Object.values(store.sessions)!==null){
     if (JSON.parse(Object.values(store.sessions)[0]).isAuth) {
+      req.user_id=JSON.parse(Object.values(store.sessions)[0]).passport.user;
       return next();
     } else {
       res.redirect('/login')
@@ -66,27 +68,53 @@ app.get("/logout", (req, res) => {
       res.redirect('/')
     })
   
-  // req.logout();
-  // res.redirect("/login");
 });
 
 app.get('/login', (req, res, next)=>{
-  res.render("login");
+  res.json({message:'incorrect username/password', redirect:'login'})
 })
 app.post('/login', passport.authenticate('local', {
   failureRedirect: '/login'
 }), (req, res)=>{
   req.session.isAuth=true;
-  res.redirect('/home' )
+  res.redirect('/home')
 });
+app.get('/register', (req, res, next)=>{
+  res.render("register");
+})
+// app.post('/register', passport.authenticate('register', {
+//   failureRedirect: '/register'
+// }))
 
 app.get('/home', function(req, res, next) {
   res.send(JSON.parse(Object.values(store.sessions)[0]).passport);
 });
 
 app.get('/', (req, res, next)=>{
-  res.send('successful')
+  res.send("<a href='/auth/google'>Authenticate with google</a>")
 });
+
+app.get('/auth/google',
+  passport.authenticate('google', { scope:
+      [ 'email', 'profile' ] }
+));
+
+app.get('/auth/google/callback',
+    passport.authenticate( 'google', {
+    failureRedirect: '/auth/google/failure'
+}), (req, res)=>{
+  req.session.isAuth=true;
+  res.redirect('http://localhost:3000/home')
+});
+
+app.get('/auth/google/success', (req, res, next)=>{
+
+  res.send('hello welcome')
+})
+
+app.get('/auth/google/failure', (req, res, next)=>{
+  res.send('failure')
+})
 
 
 
@@ -103,7 +131,10 @@ app.delete('/products/:id', dbquery.deleteProduct);
 app.put('/products', dbquery.updateProduct);
 app.get('/carts', dbquery.getCarts);
 app.post('/carts', dbquery.createCarts);
+app.post('/register', passportRouter);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 });
+
+module.exports={store};
