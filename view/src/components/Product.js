@@ -50,21 +50,21 @@ useEffect(()=>{
     <div className=''>
       {product.map((item)=>{
         return(
-        <div className='flex-center-column product-container'>
-            <button className='go-back' onClick={() => navigate(-1)}>
+        <div className='flex flex-col items-start justify-start ml-20 p-10 min-h-screen'>
+            <button className='ml-6 mb-5 bg-indigo-400 rounded-lg py-1 px-3' onClick={() => navigate(-1)}>
                     Go Back
             </button>
-            <div className='flex-left '>
-                <div className='product-image'>
-                    <img src={item.image}/>
+            <div className='flex items-start justify-start'>
+                <div className='px-5'>
+                    <img src={item.image} className='rounded-md w-96 h-96 object-cover'/>
                 </div>
-                <div className='product-details'>
-                    <h2>{item.name}</h2>
+                <div className='w-96'>
+                    <h2 className='text-gray-100 font-bold text-lg mb-3'>{item.name}</h2>
                      <Rating name="read-only" value={item.avg_rating} readOnly />
-                    <p>{item.long_description}</p>
-                    <div className='flex-center'>
-                        <div className='price-basket'>
-                            <span className='price-1'>${item.price}</span><button value={item.id} className='basket' onClick={(e)=>handleBasket(e)}>SEPETE EKLE</button>
+                    <p className='text-gray-100 mb-3 text-justify'>{item.long_description}</p>
+                    <div className='flex justify-center items-center'>
+                        <div className='rounded-xl border-2 border-indigo-500 mt-2'>
+                            <span className='px-3 text-indigo-500'>${item.price}</span><button value={item.id} className='bg-indigo-400 p-3 rounded-lg' onClick={(e)=>handleBasket(e)}>SEPETE EKLE</button>
                         </div>
                     </div>
                 </div>

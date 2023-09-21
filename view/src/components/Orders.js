@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import './Order.css';
 import { Link } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import { isLoggedin } from "../features/sessionSlice";
@@ -43,35 +42,39 @@ function Orders() {
     }
   }, [isLogin])
   return (
-    <>
-    <div className='order-component order-flex-center'>  
-      <h2>My Orders</h2>
-    </div>
-    <hr/>
-    {orders.map((item)=>{
-      return(
-        <div className='order-container'>
-          <Link to={`${item.id}`}>
-            <div className='order-component '>
-              <div className='order-element order-flex-space-evenly'>
-                <div className='order-name order-flex-center'>
-                  <img src='https://picsum.photos/200'/>
-                  {/* <h3> {(item.order_date)}</h3> */}
-                </div>
-                <div className='order-date order-flex-center'>
-                  <span>{formatDate(item)}</span>
-                </div>
-                <div className='order-price order-flex-center'>
-                  <span>Price : <strong>$ {item.total_price}</strong></span>
-                </div>
-              </div>
-            </div>
-          </Link>
+    <div className='flex flex-col items-center justify-start min-h-screen'>
+      <div className='w-3/4'>
+        <div className=' border-b-2 mb-5'>  
+          <h2 className='text-gray-100 text-4xl font-bold mr-10 mb-3'>My Orders</h2>         
         </div>
-    )
-    })}
+        
+        <div className=''>
+          {orders.map((item)=>{
+            return(
+              <div className=' '>
+                <Link to={`${item.id}`}>
+                  <div className='flex justify-center items-center'>
+                    <div className='bg-gray-400 flex justify-between items-center mb-2 border-2 w-full border-indigo-500 rounded-lg'>
+                      <div className='flex justify-center '>
+                        <img src='https://picsum.photos/200' className='rounded-full w-16'/>
+                        {/* <h3> {(item.order_date)}</h3> */}
+                      </div>
+                      <div className=''>
+                        <span>{formatDate(item)}</span>
+                      </div>
+                      <div className=''>
+                        <span>Price : <strong>$ {item.total_price}</strong></span>
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              </div>
+          )
+          })}
+        </div>
+      </div>
     
-    </>
+    </div>
   )
 }
 

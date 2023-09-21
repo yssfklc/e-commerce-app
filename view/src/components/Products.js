@@ -6,6 +6,10 @@ import { selectAllProducts, loadAllProducts } from '../features/addProductSlice'
 import {Link} from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import Rating from '@mui/material/Rating';
+import Productcard from './Productcard';
+import Footer from './Footer';
+import Aboutus from './Aboutus';
+import Contact from './Contact';
 
 
 
@@ -57,52 +61,34 @@ const handleBasket=(e)=>{
   }, [])
   
   return (
-    <div className='my-list-container'>
-          <h2>Product List</h2> 
-          <form className='search-form' placeholder='Type To Search A Product'>
-            <input onChange={e=>handleSearch(e)}/>
-          </form>
-          <div className='my-list'>
-          { searchquery===''? products.map((item)=>{
-           return (<div className='card'>
-                <Link to={`${item.id}`} className='product-link'>
-                <div >
-                  <img src={item.image} />
-                  <div className='flex-space-evenly'>
-                    <div className='item-head'>
-                      <h2>{item.name} <span>{item.description}</span></h2>
-                      
-                    </div>
-                      <span className='rating-span'>
-                      <Rating name="read-only" value={item.avg_rating} readOnly className='rating'/>{item.num_voters}
-                      </span>
-                      <span className='price'>${item.price}</span>
-                  </div>
-                </div>
-                  </Link>
-              <button type='submit' value={item.id} onClick={(e)=>handleBasket(e)} className='add-button'>Add To Basket</button>
-            </div>)
-          }):filteredproducts.map((item)=>{
-            return (<div className='card'>
-            <Link to={`${item.id}`} className='product-link'>
-            <div >
-              <img src={item.image} />
-              <div className='flex-space-evenly'>
-                <div className='item-head'>
-                  <h2>{item.name} <span>{item.description}</span></h2>
-                  
-                </div>
-                  <span className='rating-span'>
-                  <Rating name="read-only" value={item.avg_rating} readOnly className='rating'/>{item.num_voters}
-                  </span>
-                  <span className='price'>${item.price}</span>
-              </div>
+    <div className=''>
+      <div className='flex items-end justify-center m-10'>
+            <h2 className='text-gray-100 text-6xl font-bold mr-10  '>Ready To <span className='text-red-700'>Start?</span></h2> 
+      </div>
+      <div className='flex justify-center mb-5'>
+            <form className='w-4/5 flex justify-center'  >
+              <input onChange={e=>handleSearch(e)} className='bg-gray-100 rounded-l-lg w-2/4 h-10 ' placeholder='Type To Search A Product'/>
+              <button className='bg-gray-100 py-2 h-10 items-center px-5 rounded-r-lg'>Ara</button>
+            </form>
+      </div>
+      <div className='flex flex-col items-center '>
+            
+            <div className='flex flex-wrap justify-center w-4/5 mb-10'>
+            { searchquery===''? products.map((item)=>{
+            return (
+                <Productcard id={item.id} name={item.name} description={item.description} price={item.price} image={item.image} avg_rating={item.avg_rating} num_voters={item.num_voters} />
+              )
+            }):filteredproducts.map((item)=>{
+              return (
+                <Productcard id={item.id} name={item.name} description={item.description} price={item.price} image={item.image} avg_rating={item.avg_rating} num_voters={item.num_voters} />
+              )
+            })}
             </div>
-              </Link>
-          <button type='submit' value={item.id} onClick={(e)=>handleBasket(e)} className='add-button'>Add To Basket</button>
-        </div>)
-           })}
-          </div>
+            <Aboutus/>
+            <Contact/>
+            <Footer/>
+      </div>
+
     </div>
   )
 }
