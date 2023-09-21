@@ -5,7 +5,8 @@ Creating a backend project for an e-commerce app.
   - PostgreSQL(relational database) database is used to store data and sql is used to retrieve and write datas.
   - Frontend login-products-orders pages are developed and added picture below(Pictures from the app are at the bottom.)
   - Currently, React-redux is developing to provide global state management
-    
+#### Introduction Video From The App
+https://github.com/yssfklc/e-commerce-app/assets/121329421/6ed692ef-3860-45de-b1c0-e148ab0305cc
 
 ## Capability
  1. Create, read, update, and delete  users, orders, products, carts.
@@ -28,8 +29,7 @@ Creating a backend project for an e-commerce app.
   - Add profile edit
   - Add footer
   - Add third party Authentication
-#### Introduction Video From The App
-https://github.com/yssfklc/e-commerce-app/assets/121329421/6ed692ef-3860-45de-b1c0-e148ab0305cc
+
 #### Frontend Pictures
   1. Register/Login
 ![Screenshot 2023-09-21 212559](https://github.com/yssfklc/e-commerce-app/assets/121329421/adf2af1b-9b1c-4da2-bc1a-e84d9a72b158)
