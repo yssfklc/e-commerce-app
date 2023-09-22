@@ -13,15 +13,11 @@ function Basket() {
   const totalPrice=useSelector(selectBasketPrice);
   const currentUserId=useSelector(selectCurrentUser);
   const date = new Date().toDateString()
-  console.log(date);
+  const remove={
+    isempty:false,
+    isRemove:true
+  };
 
-  const removeElement=((e)=>{
-    e.preventDefault();
-    basket.map((item)=>{
-      if(item.id==e.target.value){
-        dispatch(removeFromBasket(item))
-      }});
-  })
   const createOrder =((e)=>{
     e.preventDefault();
     if(isLoggedin){
@@ -92,7 +88,7 @@ function Basket() {
           //       </Link>
           //   <button type='submit' value={item.id} onClick={(e)=>removeElement(e)} className='add-button'>Remove From Basket</button>
           // </div>
-          <Productcard id={item.id} name={item.name} description={item.description} price={item.price} image={item.image} avg_rating={item.avg_rating} num_voters={item.num_voters} />
+          <Productcard id={item.id} name={item.name} description={item.description} price={item.price} image={item.image} avg_rating={item.avg_rating} num_voters={item.num_voters} remove={remove} />
           )
             })}
             </div>

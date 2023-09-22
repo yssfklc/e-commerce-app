@@ -7,6 +7,10 @@ import Productcard from '../components/Productcard';
 export default function Order() {
 const {orderId} = useParams();
 const [product, setProduct]= useState([]);
+const remove={
+    isempty:true,
+    isRemove:false
+  };
 
 const getOrdersById = async(orderId)=>{
     try{
@@ -60,7 +64,7 @@ useEffect(()=>{
       //      </div>
       //        </Link>
       //  </div>
-            <Productcard id={item.id} name={item.name} description={item.description} price={item.price} image={item.image} avg_rating={item.avg_rating} num_voters={item.num_voters} />
+            <Productcard id={item.id} name={item.name} description={item.description} price={item.price} image={item.image} avg_rating={item.avg_rating} num_voters={item.num_voters} remove={remove}/>
 
        )
           })}

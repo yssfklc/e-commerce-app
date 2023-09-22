@@ -16,6 +16,11 @@ import Aboutus from '../components/Aboutus';
 function Home() {
   const [products, setProducts]=useState([]);
   const dispatch = useDispatch();
+  const remove={
+    isempty:false,
+    isRemove:false
+  };
+
 
   const getOrder = async()=>{
     try{
@@ -103,7 +108,7 @@ function Home() {
             <div className='flex'>
             {  products.slice(0, 5).map((item)=>{
            return (
-            <Productcard key={item.id} id={item.id} name={item.name} description={item.description} price={item.price} image={item.image} avg_rating={item.avg_rating} num_voters={item.num_voters} />
+            <Productcard key={item.id} id={item.id} name={item.name} description={item.description} price={item.price} image={item.image} avg_rating={item.avg_rating} num_voters={item.num_voters} remove={remove}/>
        )
           })}
           </div>

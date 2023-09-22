@@ -21,7 +21,10 @@ function Products() {
   const temporary = useSelector(selectAllProducts);
   const products = [];
   // const isLogin=useSelector(isLoggedin);
-  const navigate = useNavigate();
+  const remove={
+    isempty:false,
+    isRemove:false
+  };
 
   
   
@@ -75,11 +78,11 @@ const handleBasket=(e)=>{
             <div className='flex flex-wrap justify-center w-4/5 mb-10'>
             { searchquery===''? products.map((item)=>{
             return (
-                <Productcard id={item.id} name={item.name} description={item.description} price={item.price} image={item.image} avg_rating={item.avg_rating} num_voters={item.num_voters} />
+                <Productcard id={item.id} name={item.name} description={item.description} price={item.price} image={item.image} avg_rating={item.avg_rating} num_voters={item.num_voters} remove={remove} />
               )
             }):filteredproducts.map((item)=>{
               return (
-                <Productcard id={item.id} name={item.name} description={item.description} price={item.price} image={item.image} avg_rating={item.avg_rating} num_voters={item.num_voters} />
+                <Productcard id={item.id} name={item.name} description={item.description} price={item.price} image={item.image} avg_rating={item.avg_rating} num_voters={item.num_voters} remove={remove}/>
               )
             })}
             </div>

@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Rating } from '@mui/material';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addToBasket } from '../features/addBasketSlice';
+import {selectAllBasket, removeFromBasket, selectBasketPrice, removeAllFromBasket} from '../features/addBasketSlice';
 
-function Productcard({id, name, description, price, image, avg_rating, num_voters}) {
+function Productcard({id, name, description, price, image, avg_rating, num_voters, remove}) {
     const [products, setProducts]=useState([]);
     const dispatch = useDispatch();
+    const basket = useSelector(selectAllBasket);
+    const isempty=remove.isempty;
+    const isRemove=remove.isRemove;
     
     const getProducts = async()=>{
         try{
@@ -27,6 +31,13 @@ function Productcard({id, name, description, price, image, avg_rating, num_voter
             dispatch(addToBasket(item))
           }});
     }
+    const removeElement=((e)=>{
+      e.preventDefault();
+      basket.map((item)=>{
+        if(item.id==e.target.value){
+          dispatch(removeFromBasket(item))
+        }});
+    })
     useEffect( ()=>{
         getProducts();
     }, [])
@@ -38,9 +49,7 @@ function Productcard({id, name, description, price, image, avg_rating, num_voter
                   <div className='text-gray-100 mt-5'>
                     <div className='flex justify-between'>
                       <h2 className='font-bold'>{name} <span>{description}</span></h2>
-                      
                     </div>
-                    
                       <div className='text-gray-100 my-1'>
                       <Rating name="read-only" value={avg_rating} readOnly className='rating'/> {num_voters}
                       </div>
@@ -49,9 +58,9 @@ function Productcard({id, name, description, price, image, avg_rating, num_voter
                   </div>
                 </div>
               </Link>
-              <div className=' flex items-end m-2 justify-center'>
-                <button value={id} onClick={(e)=>handleBasket(e)} className='bg-red-400 text-gray-100 py-1 px-10 rounded-lg text-center'>Add To Basket</button>
-              </div>
+              {remove.isempty?null:<div className=' flex items-end m-2 justify-center'>
+                <button value={id} onClick={(e)=>{remove.isRemove?removeElement(e):handleBasket(e)}} className='bg-red-400 text-gray-100 py-1 px-10 rounded-lg text-center'>{remove.isRemove?'Remove From Basket':'Add To Basket'}</button>
+              </div>}
         </div>
   )
 }
