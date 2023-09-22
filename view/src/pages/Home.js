@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import './Home.css';
 import p1 from '../img/p1.png';
 import p2 from '../img/p2.png';
 import p3 from '../img/p3.png';
@@ -8,10 +7,10 @@ import { useDispatch } from 'react-redux';
 import { addToBasket } from '../features/addBasketSlice';
 import {getUser} from '../requests/requests';
 import Rating from '@mui/material/Rating';
-import Footer from './Footer';
-import Contact from './Contact';
-import Productcard from './Productcard';
-import Aboutus from './Aboutus';
+import Footer from '../components/Footer';
+import Contact from '../components/Contact';
+import Productcard from '../components/Productcard';
+import Aboutus from '../components/Aboutus';
 
 
 function Home() {
@@ -76,7 +75,7 @@ function Home() {
           <div className=' col-start-1 col-span-12 row-start-3 row-span-1  max-h-screen'>
             <img src={p2} className=' w-screen h-screen object-cover'/>
           </div>
-          <div className='bg-gray-800/75 col-start-1 col-span-12 row-start-3 row-span-1'  max-h-screen>   
+          <div className='bg-gray-800/75 col-start-1 col-span-12 row-start-3 row-span-1'>   
           </div>
           <div className=' col-start-3 col-span-4 row-start-3 row-span-1 flex items-center max-h-screen'>
             <div className=''>
@@ -104,7 +103,7 @@ function Home() {
             <div className='flex'>
             {  products.slice(0, 5).map((item)=>{
            return (
-            <Productcard id={item.id} name={item.name} description={item.description} price={item.price} image={item.image} avg_rating={item.avg_rating} num_voters={item.num_voters} />
+            <Productcard key={item.id} id={item.id} name={item.name} description={item.description} price={item.price} image={item.image} avg_rating={item.avg_rating} num_voters={item.num_voters} />
        )
           })}
           </div>

@@ -1,13 +1,13 @@
-import logo from './logo.svg';
+
 import Navbar from './components/Navbar';
-import Register from './components/Register';
-import Login from './components/Login';
-import Home from './components/Home';
-import Orders from './components/Orders';
-import Order from './components/Order';
-import Products from './components/Products';
-import Product from './components/Product';
-import Basket from './components/Basket';
+import Register from './pages/Register';
+import Login from './pages/Login';
+import Home from './pages/Home';
+import Orders from './pages/Orders';
+import Order from './pages/Order';
+import Products from './pages/Products';
+import Product from './pages/Product';
+import Basket from './pages/Basket';
 import { RouterProvider, createBrowserRouter, createRoutesFromElements, Route} from 'react-router-dom';
 
 function App() {

@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import './Home.css';
 import { Provider, useSelector, useDispatch } from 'react-redux';
 import {selectAllBasket, removeFromBasket, selectBasketPrice, removeAllFromBasket} from '../features/addBasketSlice';
 import { isLoggedin, selectCurrentUser} from '../features/sessionSlice';
 import { useNavigate } from 'react-router-dom';
-import { Rating } from '@mui/material';
-import {Link} from 'react-router-dom';
-import Productcard from './Productcard';
+import Productcard from '../components/Productcard';
 
 
 function Basket() {
@@ -27,34 +24,38 @@ function Basket() {
   })
   const createOrder =((e)=>{
     e.preventDefault();
-    const product_id = (basket.map(item=>item.id));
-    const order_obj={
-      user_id:currentUserId.payload,
-      product_id:product_id,
-      date:date,
-      price:totalPrice
-    }
-    const createOrder=async(order_obj)=>{
-      try{
-        const response = await fetch('http://localhost:8000/orders',{
-          method:'POST',
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*"
-            // 'Content-Type': 'application/x-www-form-urlencoded',
-          },
-          body: JSON.stringify(order_obj),
-        });
-        if(response.ok){
-          const data=await response.json();
-          dispatch(removeAllFromBasket());
-          navigate('/orders');
-        }
-      }catch(err){
-        console.log(err)
+    if(isLoggedin){
+      const product_id = (basket.map(item=>item.id));
+      const order_obj={
+        user_id:currentUserId.payload,
+        product_id:product_id,
+        date:date,
+        price:totalPrice
       }
+      const createOrder=async(order_obj)=>{
+        try{
+          const response = await fetch('http://localhost:8000/orders',{
+            method:'POST',
+            headers: {
+              "Content-Type": "application/json",
+              "Access-Control-Allow-Origin": "*"
+              // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: JSON.stringify(order_obj),
+          });
+          if(response.ok){
+            const data=await response.json();
+            dispatch(removeAllFromBasket());
+            navigate('/orders');
+          }
+        }catch(err){
+          console.log(err)
+        }
+      }
+      createOrder(order_obj);
+    }else{
+      navigate('/login');
     }
-    createOrder(order_obj);
   })
   
   

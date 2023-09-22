@@ -2,10 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import personlogo from '../img/person.svg';
 import { useDispatch, useSelector } from "react-redux";
-import { isLoggedin, tryLogin, login } from "../features/sessionSlice";
-import { Navigate } from "react-router-dom";
+import { isLoggedin, tryLogin, isLoading, message } from "../features/sessionSlice";
 import google from '../img/google.svg';
-import Footer from "./Footer";
+
 
 
 
@@ -15,18 +14,18 @@ const [password, setPassword]=useState('');
 const [err, setErr]=useState('');
 const dispatch= useDispatch();
 const isLogin=useSelector(isLoggedin);
+const loading=useSelector(isLoading);
+const mess=useSelector(message);
 const navigate = useNavigate();
 
 
 const handleUsername=(e)=> {
     setUserName(e.target.value);
     setErr('');
-    console.log(userName);
   };
   function handlePassword(e) {
     setPassword(e.target.value);
     setErr('');
-    console.log(password);
   }
 const handleClick=(event)=>{
     event.preventDefault();
@@ -38,48 +37,16 @@ const handleClick=(event)=>{
         password:password
     } 
     dispatch(tryLogin(data));
-    if(isLogin){
-        navigate('/orders');
-    }else{
-        setErr('incorrect informations')
-        navigate('/login');
+    
+    if(!loading){
+        console.log(loading);
+        if(isLogin){
+            navigate('/orders');
+        }else{
+            setErr(mess)
+            navigate('/login');
+        }
     }
-    // async function register(data){
-    //     try{
-    //         const response = await fetch('http://localhost:8000/login',{
-    //             method: 'POST',
-    //             headers: {
-    //                 "Content-Type": "application/json",
-    //                 "Access-Control-Allow-Origin": "*"
-    //                 // 'Content-Type': 'application/x-www-form-urlencoded',
-    //             },
-    //             body: JSON.stringify(data),
-                
-    //         });
-    //         // const user = await response.json();
-    //         console.log(response)
-    //         if(response.ok){
-
-    //             navigate('/home')
-    //         }else{
-    //             // navigate('/register')
-    //             navigate('/login')
-    //         }
-    //     }catch(error){
-    //         console.log(error);
-    //     }
-
-    // }
-    // register(data);
-    
-    
-    // e.preventDefault();
-    // let isAuthenticated=false;
-    // if(isAuthenticated){
-    //     navigate('/home')
-    // }else{
-    //     navigate('/register')
-    // }
 }
 const handleGoogleAuth=(event)=>{
     event.preventDefault();
@@ -92,7 +59,7 @@ useEffect(()=>{
     }else{
         navigate('/login');
     }
-}, [isLogin, ])
+}, [isLogin])
     return (
         <div className="flex flex-col items-center  justify-center  min-h-screen">
             <div className="bg-gray-500 py-8 px-4 rounded-lg w-1/5">
@@ -106,7 +73,7 @@ useEffect(()=>{
                     </div>
                     <div className="flex flex-col">
                         <label className="text-gray-100 text-xs mb-1">Password</label>
-                        <input type="password" value={password} onChange={handlePassword} className="rounded-lg bg-gray-800 text-gray-100 h-8 text-sm px-1"/>
+                        <input type="password" value={password} onChange={handlePassword} className="rounded-lg bg-gray-800 text-gray-100 h-8 text-sm px-1 " autoComplete="current-password"/>
                         <span className="text-red-800 text-xs">{err?err:''}</span>
                     </div>
                     <button type="submit" onClick={event=>handleClick(event)}  className="bg-indigo-500 mt-5 mb-3 text-gray-100 py-1 rounded-lg w-full px-8">Login</button>

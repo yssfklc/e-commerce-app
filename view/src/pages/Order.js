@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {useParams} from 'react-router-dom';
 import { Rating } from '@mui/material';
 import {Link} from 'react-router-dom';
-import Productcard from './Productcard';
+import Productcard from '../components/Productcard';
 
 export default function Order() {
 const {orderId} = useParams();

@@ -12,7 +12,7 @@ function Aboutus() {
             <div className='flex p-10 justify-center flex-wrap'>
               {reasons.map((reason)=>{
                 return(
-                  <div className='w-5/12 p-5 border-2 border-red-700 m-5'>
+                  <div className='w-5/12 p-5 border-2 border-red-700 m-5' key={reason[0]}>
                     <p className='text-gray-100 text-xl mb-5 font-bold'>{reason[0]}</p>
                     <h3 className='text-red-700 font-bold text-xl pb-2'>{reason[1]}</h3>
                     <p className='text-gray-100'>{reason[2]}</p>

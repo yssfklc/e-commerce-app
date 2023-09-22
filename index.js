@@ -87,7 +87,9 @@ app.get('/register', (req, res, next)=>{
 // }))
 
 app.get('/home', function(req, res, next) {
-  res.send(JSON.parse(Object.values(store.sessions)[0]).passport);
+  if(Object.values(store.sessions)[0]){
+    res.send(JSON.parse(Object.values(store.sessions)[0]).passport);
+  }
 });
 
 app.get('/', (req, res, next)=>{

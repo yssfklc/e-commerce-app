@@ -19,7 +19,7 @@ function Navbar(){
 
     return (
         <>
-          <navbar className='flex justify-between bg-gray-800 text-gray-200 py-3 px-10 text-xl sticky top-0'>
+          <div className='flex justify-between bg-gray-800 text-gray-200 py-3 px-10 text-xl sticky top-0'>
             <div className='flex items-center'>
                 <NavLink><img src={i1} alt="" className="w-12 mr-5"/></NavLink>
                 <NavLink to='/home' className={ ({ isActive }) => isActive? 'activeNavLink text-2xl pr-5' : 'pinactiveNavLink pr-5'} >Home</NavLink>
@@ -37,7 +37,7 @@ function Navbar(){
                 <NavLink to='/login' className='mr-5 py-1 px-3 text-center'>Sign In</NavLink>
               </div>}
             
-          </navbar>
+          </div>
           <Outlet/>
         </>
     )

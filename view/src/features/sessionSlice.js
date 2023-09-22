@@ -23,7 +23,7 @@ export const tryLogin=createAsyncThunk('users/tryLogin', async(data)=>{
                 const result = await response.json();  
                 return result;
             }else{
-                console.log(response);
+                return response;
 
             }
         }catch(error){
@@ -39,12 +39,12 @@ const addSessionSlice=createSlice({
     initialState:{
         userId:'',
         isLoggedin:false,
+        message:'',
         isLoading: false,
-        hasError: false
+        hasError: false,
     },
     reducers:{
         login(state, id){
-            console.log('check-login')
             state.userId=id;
             state.isLoggedin=true;
         },
@@ -60,12 +60,17 @@ const addSessionSlice=createSlice({
             state.hasError = false;
         })
         .addCase(tryLogin.fulfilled, (state, action) => {
-            state.isLoading = false;
-            state.hasError = false;
+            console.log();
+            if(action.payload.message){
+                console.log(action.payload.message)
+                state.message=action.payload.message;
+            }
             if(action.payload.user){
                 state.userId=action.payload.user;
                 state.isLoggedin=true;
             }
+            state.isLoading = false;
+            state.hasError = false;
         })
         .addCase(tryLogin.rejected, (state, action) => {
             state.isLoading = false;
@@ -76,6 +81,8 @@ const addSessionSlice=createSlice({
 })
 
 export const isLoggedin=(state=>state.users.isLoggedin);
+export const isLoading=(state=>state.users.isLoading);
+export const message=(state=>state.users.message);
 export const selectCurrentUser=(state=>state.users.userId);
 export const {login, logout} = addSessionSlice.actions;
 

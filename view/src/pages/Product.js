@@ -3,7 +3,6 @@ import { useParams, useNavigate } from 'react-router-dom';
 import Rating from '@mui/material/Rating';
 import { useDispatch } from 'react-redux';
 import { addToBasket } from '../features/addBasketSlice';
-import './Product.css';
 
 function Product() {
     const {productId} = useParams();

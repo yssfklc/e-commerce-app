@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import './Home.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { addToBasket } from '../features/addBasketSlice';
 import { selectAllProducts, loadAllProducts } from '../features/addProductSlice';
 import {Link} from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import Rating from '@mui/material/Rating';
-import Productcard from './Productcard';
-import Footer from './Footer';
-import Aboutus from './Aboutus';
-import Contact from './Contact';
+import Productcard from '../components/Productcard';
+import Footer from '../components/Footer';
+import Aboutus from '../components/Aboutus';
+import Contact from '../components/Contact';
 
 
 

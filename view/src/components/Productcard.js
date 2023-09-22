@@ -7,7 +7,7 @@ import { addToBasket } from '../features/addBasketSlice';
 function Productcard({id, name, description, price, image, avg_rating, num_voters}) {
     const [products, setProducts]=useState([]);
     const dispatch = useDispatch();
-
+    
     const getProducts = async()=>{
         try{
           const response = await fetch('http://localhost:8000/products')
