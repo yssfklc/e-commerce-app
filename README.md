@@ -4,7 +4,7 @@ Creating a backend project for an e-commerce app.
   - For login passport.js and bcrypt library is used.
   - PostgreSQL(relational database) database is used to store data and sql is used to retrieve and write datas.
   - Frontend login-products-orders pages are developed and added picture below(Pictures from the app are at the bottom.)
-  - Currently, React-redux is developing to provide global state management
+  - React-redux to provide global state management
 #### Introduction Video From The App
 https://github.com/yssfklc/e-commerce-app/assets/121329421/c082739e-0a47-4846-84c1-2a03724918fa
 
