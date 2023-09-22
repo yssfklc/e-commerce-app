@@ -5,7 +5,8 @@ Creating a backend project for an e-commerce app.
   - PostgreSQL(relational database) database is used to store data and sql is used to retrieve and write datas.
   - Frontend login-products-orders pages are developed and added picture below(Pictures from the app are at the bottom.)
   - Currently, React-redux is developing to provide global state management
-    
+#### Introduction Video From The App
+https://github.com/yssfklc/e-commerce-app/assets/121329421/6ed692ef-3860-45de-b1c0-e148ab0305cc
 
 ## Capability
  1. Create, read, update, and delete  users, orders, products, carts.
@@ -28,15 +29,14 @@ Creating a backend project for an e-commerce app.
   - Add profile edit
   - Add footer
   - Add third party Authentication
-#### Video From The App
-https://github.com/yssfklc/e-commerce-app/assets/121329421/a2253cb1-db8d-49e5-b829-641193fd8c42
+
 #### Frontend Pictures
   1. Register/Login
-![image](https://github.com/yssfklc/e-commerce-app/assets/121329421/50968348-5dd2-4327-9fa3-acb2e969c50c)
-  2. Products/Home Page
-![image](https://github.com/yssfklc/e-commerce-app/assets/121329421/2d98e639-d355-497c-858c-f995ea012593)
-  3. Orders Page
-![image](https://github.com/yssfklc/e-commerce-app/assets/121329421/42e6e301-96a5-4522-9afd-7e40f6b2731b)
+![Screenshot 2023-09-21 212559](https://github.com/yssfklc/e-commerce-app/assets/121329421/adf2af1b-9b1c-4da2-bc1a-e84d9a72b158)
+  2. Home Page
+![Screenshot 2023-09-21 212547](https://github.com/yssfklc/e-commerce-app/assets/121329421/bdfbea68-49c8-479c-aa0e-0baeef8ce45c)
+  4. Basket Page
+![Screenshot 2023-09-21 212930](https://github.com/yssfklc/e-commerce-app/assets/121329421/135f925e-f2dc-4b8e-8375-d7ef498c5479)
 
 
 
