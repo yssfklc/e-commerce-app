@@ -100,7 +100,7 @@ function Home() {
               </div>
             </div>
           </div>
-          <div className='col-start-2 col-span-10 row-start-4 row-span-1  max-h-screen'>
+          <div className='col-start-2 col-span-10 row-start-4 row-span-1  max-h-screen mb-10'>
             <div className='flex flex-col items-center justify-center'>
               <h1 className='text-gray-100 text-6xl mb-10 font-bold text-center'>Our Amazing <br/><span className='text-red-700'>Products</span></h1>
               <p className='text-gray-100 mb-10 w-3/4'>Gym training is a structured and disciplined approach to physical exercise that focuses on strength, endurance and overall fitness improvement.</p>  
@@ -113,7 +113,7 @@ function Home() {
           })}
           </div>
           <div className='flex items-center justify-center'>
-            <Link to='/products' className='bg-indigo-500 text-xl font-bold text-gray-100 mt-10  text-gray-100py-1 px-20 rounded-lg text-center'>All Products</Link> 
+            <Link to='/products' className='bg-indigo-500 text-xl font-bold text-gray-100 mt-2 text-gray-100py-1 px-20 rounded-lg text-center'>All Products</Link> 
           </div>
           </div>
           <div className='col-start-1 col-span-12 row-start-5 row-end-auto  max-h-screen'>

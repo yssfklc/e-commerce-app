@@ -60,7 +60,8 @@ const addSessionSlice=createSlice({
             state.hasError = false;
         })
         .addCase(tryLogin.fulfilled, (state, action) => {
-            console.log();
+            state.isLoading = false;
+            state.hasError = false;
             if(action.payload.message){
                 console.log(action.payload.message)
                 state.message=action.payload.message;
@@ -69,8 +70,6 @@ const addSessionSlice=createSlice({
                 state.userId=action.payload.user;
                 state.isLoggedin=true;
             }
-            state.isLoading = false;
-            state.hasError = false;
         })
         .addCase(tryLogin.rejected, (state, action) => {
             state.isLoading = false;
