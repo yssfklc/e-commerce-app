@@ -6,7 +6,7 @@ const url='http://localhost:8000/login';
 
 
 export const tryLogin=createAsyncThunk('users/tryLogin', async(data)=>{
-
+        console.log('login-request sent')
         try{
             const response = await fetch(url, {
                 method: 'POST',

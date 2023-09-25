@@ -41,6 +41,7 @@ passport.use(new LocalStrategy(function verify(username, password, next) {
 
 const passportRouter=async (request, response)=>{
     const {username, password} = request.body;
+    console.log(username);
     try {
         const user = await db.pool.query('SELECT * FROM users WHERE username=$1', [username])
         if(user.rows[0]){

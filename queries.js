@@ -51,7 +51,13 @@ const createOrders = (request, response)=>{
         if(error){
             throw error
         }
-        lastOrderid = results.rows[0].id + 1;
+        
+        if(results.rows[0]){
+            lastOrderid = results.rows[0].id + 1;
+        }else{
+            console.log('check rows')
+            lastOrderid=101;
+        }
         db.pool.query('INSERT INTO orders VALUES ($1, $2, $3, $4, $5) RETURNING *', [lastOrderid, user_id, 'test', date, price], (error, results)=>{
             if(error){
                 throw error
