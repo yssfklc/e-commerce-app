@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-
+const path = require('path');
 const passport = require("passport");
 const session = require("express-session");
 const store = new session.MemoryStore();
@@ -22,6 +22,9 @@ app.use(cors());
 // }
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(__dirname + "client/public"));
+if(process.env.NODE_ENV === 'production'){
+  app.use(express.static(path.join(__dirname + "client/public")));
+}
 
 app.use(
   session({
