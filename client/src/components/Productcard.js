@@ -14,7 +14,7 @@ function Productcard({id, name, description, price, image, avg_rating, num_voter
     
     const getProducts = async()=>{
         try{
-          const response = await fetch('/products')
+          const response = await fetch('api/products')
           if(response.ok){
             const result = await response.json();
             setProducts(result);

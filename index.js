@@ -21,7 +21,7 @@ app.use(cors());
 //   credentials:true
 // }
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static(__dirname + "client/build"));
+app.use(express.static("client/build"));
 if(process.env.NODE_ENV === 'production'){
   app.use(express.static(path.join(__dirname + "client/build")));
 }
@@ -56,7 +56,7 @@ const ensureAuthentication = (req, res, next)=> {
   }
 }
 
-app.get("/logout", (req, res) => {
+app.get("api/logout", (req, res) => {
   req.session.user = null
   
 
@@ -73,29 +73,29 @@ app.get("/logout", (req, res) => {
   
 });
 
-app.get('/login', (req, res, next)=>{
+app.get('api/login', (req, res, next)=>{
   res.json({message:'incorrect username/password', redirect:'login'})
 })
-app.post('/login', passport.authenticate('local', {
+app.post('api/login', passport.authenticate('local', {
   failureRedirect: '/login'
 }), (req, res)=>{
   req.session.isAuth=true;
   res.redirect('/home')
 });
-app.get('/register', (req, res, next)=>{
+app.get('api/register', (req, res, next)=>{
   res.render("register");
 })
 // app.post('/register', passport.authenticate('register', {
 //   failureRedirect: '/register'
 // }))
 
-app.get('/home', function(req, res, next) {
+app.get('api/home', function(req, res, next) {
   if(Object.values(store.sessions)[0]){
     res.send(JSON.parse(Object.values(store.sessions)[0]).passport);
   }
 });
 
-app.get('/', (req, res, next)=>{
+app.get('api/', (req, res, next)=>{
   res.send("<a href='/auth/google'>Authenticate with google</a>")
 });
 
@@ -124,19 +124,19 @@ app.get('/auth/google/failure', (req, res, next)=>{
 
 
 
-app.get('/orders', ensureAuthentication, dbquery.getOrders);
-app.post('/ordersbyid', dbquery.getOrdersById);
-app.post('/orders', dbquery.createOrders);
-app.delete("/orders/:id", dbquery.deleteOrder);
-app.put("/orders", dbquery.updateOrder);
-app.get('/products', dbquery.getProducts);
-app.post('/productsbyid', dbquery.getProductsById);
-app.post('/products', dbquery.createProduct);
-app.delete('/products/:id', dbquery.deleteProduct);
-app.put('/products', dbquery.updateProduct);
-app.get('/carts', dbquery.getCarts);
-app.post('/carts', dbquery.createCarts);
-app.post('/register', passportRouter);
+app.get('api/orders', ensureAuthentication, dbquery.getOrders);
+app.post('api/ordersbyid', dbquery.getOrdersById);
+app.post('api/orders', dbquery.createOrders);
+app.delete("api/orders/:id", dbquery.deleteOrder);
+app.put("api/orders", dbquery.updateOrder);
+app.get('api/products', dbquery.getProducts);
+app.post('api/productsbyid', dbquery.getProductsById);
+app.post('api/products', dbquery.createProduct);
+app.delete('api/products/:id', dbquery.deleteProduct);
+app.put('api/products', dbquery.updateProduct);
+app.get('api/carts', dbquery.getCarts);
+app.post('api/carts', dbquery.createCarts);
+app.post('api/register', passportRouter);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)

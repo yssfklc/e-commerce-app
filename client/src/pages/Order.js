@@ -14,7 +14,7 @@ const remove={
 
 const getOrdersById = async(orderId)=>{
     try{
-        const response = await fetch('/ordersbyid',{
+        const response = await fetch('api/ordersbyid',{
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",

@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import Cookies from 'js-cookie';
 import { Navigate } from "react-router-dom";
 
-const url='/login';
+const url='api/login';
 
 
 export const tryLogin=createAsyncThunk('users/tryLogin', async(data)=>{

@@ -30,7 +30,7 @@ function Basket() {
       }
       const createOrder=async(order_obj)=>{
         try{
-          const response = await fetch('/orders',{
+          const response = await fetch('api/orders',{
             method:'POST',
             headers: {
               "Content-Type": "application/json",

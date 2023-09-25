@@ -24,7 +24,7 @@ function Home() {
 
   const getOrder = async()=>{
     try{
-      const response = await fetch('/products')
+      const response = await fetch('api/products')
       if(response.ok){
         const result = await response.json();
         setProducts(result);
