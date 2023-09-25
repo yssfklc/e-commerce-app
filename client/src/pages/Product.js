@@ -11,7 +11,7 @@ function Product() {
     const navigate=useNavigate();
 const getProductsById = async(productId)=>{
     try{
-        const response = await fetch('http://localhost:8000/productsbyid',{
+        const response = await fetch('/productsbyid',{
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",

@@ -4,7 +4,7 @@ const app = express();
 const passport = require("passport");
 const session = require("express-session");
 const store = new session.MemoryStore();
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 5000;
 const dbquery= require('./queries.js');
 const {passportRouter}= require('./passport.js'); 
 const cors = require('cors');
@@ -21,7 +21,7 @@ app.use(cors());
 //   credentials:true
 // }
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static(__dirname + "/public"));
+app.use(express.static(__dirname + "client/public"));
 
 app.use(
   session({
@@ -106,7 +106,7 @@ app.get('/auth/google/callback',
     failureRedirect: '/auth/google/failure'
 }), (req, res)=>{
   req.session.isAuth=true;
-  res.redirect('http://localhost:3000/home')
+  res.redirect('/home')
 });
 
 app.get('/auth/google/success', (req, res, next)=>{

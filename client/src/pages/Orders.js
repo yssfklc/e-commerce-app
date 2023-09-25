@@ -15,7 +15,7 @@ function Orders() {
   //Get orders
   const getOrders=async()=>{
     try{
-      const response = await fetch('http://localhost:8000/orders');
+      const response = await fetch('/orders');
       if(response.ok){
         const data = await response.json();
         setOrders(data);

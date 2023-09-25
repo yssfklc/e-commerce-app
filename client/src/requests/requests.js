@@ -4,7 +4,7 @@ import store from '../components/store';
 
 export const getUser=async()=>{
     try{
-      const response = await fetch('http://localhost:8000/home')
+      const response = await fetch('/home')
       if(response.ok){
         const result = await response.json();
         store.dispatch(login(result.user));

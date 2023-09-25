@@ -50,7 +50,7 @@ const handleClick=(event)=>{
 }
 const handleGoogleAuth=(event)=>{
     event.preventDefault();
-    window.open('http://localhost:8000/auth/google', '_self');
+    window.open('/auth/google', '_self');
 
 }
 useEffect(()=>{

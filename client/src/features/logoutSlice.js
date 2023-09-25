@@ -4,7 +4,7 @@ import { Navigate } from "react-router-dom";
 import { logout } from "./sessionSlice";
 import { useDispatch } from "react-redux";
 
-const url='http://localhost:8000/logout';
+const url='/logout';
 
 
 export const tryLogout=createAsyncThunk('logout/tryLogout', async()=>{
