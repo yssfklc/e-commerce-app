@@ -24,7 +24,7 @@ function Home() {
 
   const getOrder = async()=>{
     try{
-      const response = await fetch('api/products')
+      const response = await fetch('/api/products')
       if(response.ok){
         const result = await response.json();
         setProducts(result);
@@ -34,13 +34,13 @@ function Home() {
     }
      
   };
-  getUser();
+  // getUser();
   // queries ends
   
   
   useEffect( ()=>{
      getOrder();
-     getUser();
+    //  getUser();
   }, [])
   
   return (

@@ -43,7 +43,7 @@ const ensureAuthentication = (req, res, next)=> {
       req.user_id=JSON.parse(Object.values(store.sessions)[0]).passport.user;
       return next();
     } else {
-      res.redirect('/login')
+      // res.redirect('/api/login')
       res.status(403).json({ msg: "You're not authorized to view this page" });
     }
   }else{
@@ -72,10 +72,10 @@ app.get('/api/login', (req, res, next)=>{
   res.json({message:'incorrect username/password', redirect:'login'})
 })
 app.post('/api/login', passport.authenticate('local', {
-  failureRedirect: '/login'
+  failureRedirect: '/api/login'
 }), (req, res)=>{
   req.session.isAuth=true;
-  res.redirect('/home')
+  res.send({message: 'login success', user: JSON.parse(Object.values(store.sessions)[0]).passport});
 });
 app.get('/api/register', (req, res, next)=>{
   res.render("register");
@@ -85,8 +85,14 @@ app.get('/api/register', (req, res, next)=>{
 // }))
 
 app.get('/api/home', function(req, res, next) {
+  console.log(Object.values(store.sessions)[0]);
   if(Object.values(store.sessions)[0]){
+    console.log('home request started')
     res.send(JSON.parse(Object.values(store.sessions)[0]).passport);
+    console.log('home request finished')
+
+  }else{
+    res.status(403).send({message: "user didn't authenticated"})
   }
 });
 

@@ -7,6 +7,7 @@ export const getUser=async()=>{
       const response = await fetch('api/home')
       if(response.ok){
         const result = await response.json();
+        console.log(result);
         store.dispatch(login(result.user));
       }
     }catch(error){

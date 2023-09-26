@@ -60,15 +60,18 @@ const addSessionSlice=createSlice({
             state.hasError = false;
         })
         .addCase(tryLogin.fulfilled, (state, action) => {
+            console.log(action.payload);
+            console.log('request fullfilled');
             state.isLoading = false;
             state.hasError = false;
-            if(action.payload.message){
-                console.log(action.payload.message)
-                state.message=action.payload.message;
-            }
             if(action.payload.user){
+                console.log(action.payload.user)
                 state.userId=action.payload.user;
                 state.isLoggedin=true;
+            }
+            if(action.payload.message && !action.payload.user){
+                
+                state.message=action.payload.message;
             }
         })
         .addCase(tryLogin.rejected, (state, action) => {

@@ -41,6 +41,7 @@ const handleClick=(event)=>{
     if(!loading){
         console.log(loading);
         if(isLogin){
+            console.log('tried to navigate')
             navigate('/orders');
         }else{
             setErr(mess)
@@ -54,12 +55,14 @@ const handleGoogleAuth=(event)=>{
 
 }
 useEffect(()=>{
+    console.log(isLogin)
     if(isLogin){
+        console.log('tried to navigate')
         navigate('/orders');
     }else{
         navigate('/login');
     }
-}, [isLogin])
+}, [isLogin, ])
     return (
         <div className="flex flex-col items-center  justify-center  min-h-screen">
             <div className="bg-gray-500 py-8 px-4 rounded-lg w-1/5">
