@@ -66,8 +66,8 @@ function Home() {
   
   return (
     <div className=' grid grid-cols-12 grid-rows-5 gap-5 max-sm:max-w-screen max-sm:grid-rows-1'>
-          <div className=' col-start-1 col-span-12 row-start-1 row-span-1 max-h-screen '>
-            <img src={p1} className='h-screen object-cover'/>
+          <div className=' col-start-1 col-span-12 row-start-1 row-span-1 max-w-screen max-h-screen '>
+            <img src={p1} className='h-screen w-screen object-cover'/>
           </div>
           <div className='bg-gray-800/50 col-start-1 col-span-12 row-start-1 row-span-1  max-h-screen '>   
           </div>
