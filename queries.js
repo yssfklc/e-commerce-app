@@ -106,6 +106,7 @@ const getProducts = (request, response)=>{
 };
 const getProductsById = (request, response)=>{
     const {id} = request.body;
+    console.log(id);
     db.pool.query('SELECT * FROM products WHERE id=$1', [id], (error, results)=>{
         if(error){
             throw error

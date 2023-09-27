@@ -62,39 +62,21 @@ function Basket() {
   }, [])
   
   return (
-    <div className='flex items-start justify-center min-h-screen'>
+    <div className='flex items-start justify-center min-h-screen max-sm:flex-col'>
           
           
             
-            <div className='flex flex-wrap justify-center w-3/5 mb-10'>
+            <div className='flex flex-wrap justify-center w-3/5 mb-10 max-sm:w-full max-sm:mx-auto'>
 
-            { basket.map((item)=>{
+            { basket.length===0?<p className='text-gray-100 sm:hidden'> Add Products To See Here</p>:basket.map((item)=>{
             return (
-          //     <div className='card'>
-          //     <Link to={`../products/${item.id}`} className='product-link'>
-          //     <div >
-          //       <img src={item.image} />
-          //       <div className='flex-space-evenly'>
-          //         <div className='item-head'>
-          //           <h2>{item.name} <span>{item.description}</span></h2>
-                    
-          //         </div>
-          //           <span className='rating-span'>
-          //           <Rating name="read-only" value={item.avg_rating} readOnly className='rating'/>{item.num_voters}
-          //           </span>
-          //           <span className='price'>${item.price}</span>
-          //       </div>
-          //     </div>
-          //       </Link>
-          //   <button type='submit' value={item.id} onClick={(e)=>removeElement(e)} className='add-button'>Remove From Basket</button>
-          // </div>
           <Productcard id={item.id} name={item.name} description={item.description} price={item.price} image={item.image} avg_rating={item.avg_rating} num_voters={item.num_voters} remove={remove} />
           )
             })}
             </div>
 
           
-          <div className='bg-gray-300 flex flex-col justify-center sticky top-16 mt-1 w-80 py-10 px-8 rounded-lg border-2 border-indigo-500'>
+          <div className='bg-gray-300 flex flex-col justify-center sticky top-16 mt-1 w-80 py-10 px-8 rounded-lg border-2 border-indigo-500 max-sm:static max-sm:w-11/12 max-sm:mx-auto' >
           <div className='flex justify-between py-1 px-1 font-bold border-b-2'>
                   <p>Name</p>
                   <p>Price</p>

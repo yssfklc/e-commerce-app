@@ -110,7 +110,7 @@ app.get('/auth/google/callback',
     failureRedirect: '/auth/google/failure'
 }), (req, res)=>{
   req.session.isAuth=true;
-  res.redirect('/home')
+  res.redirect('/')
 });
 
 app.get('/auth/google/success', (req, res, next)=>{
@@ -121,6 +121,9 @@ app.get('/auth/google/success', (req, res, next)=>{
 app.get('/auth/google/failure', (req, res, next)=>{
   res.send('failure')
 })
+// app.get("*", (req, res)=>{
+//   res.sendFile(path.join(__dirname, "client/public/index.html"))
+// })
 
 
 

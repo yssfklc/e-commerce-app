@@ -69,7 +69,7 @@ const handleBasket=(e)=>{
       </div>
       <div className='flex justify-center mb-5'>
             <form className='w-4/5 flex justify-center'  >
-              <input onChange={e=>handleSearch(e)} className='bg-gray-100 rounded-l-lg w-2/4 h-10 ' placeholder='Type To Search A Product'/>
+              <input onChange={e=>handleSearch(e)} className='bg-gray-100 rounded-l-lg w-2/4 h-10 max-sm:text-base max-sm:w-3/4' placeholder='Type To Search A Product'/>
               <button className='bg-gray-100 py-2 h-10 items-center px-5 rounded-r-lg'>Ara</button>
             </form>
       </div>
