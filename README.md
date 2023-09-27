@@ -5,7 +5,7 @@ Creating a backend project for an e-commerce app.
   - PostgreSQL(relational database) database is used to store data and sql is used to retrieve and write datas.
   - Frontend login-products-orders pages are developed and added picture below(Pictures from the app are at the bottom.)
   - React-redux to provide global state management
-  - This project lives on https://e-commerce-app-yssfklc.netlify.app/
+  - This project lives on [https://e-commerce-app-yssfklc.netlify.app/](https://e-commerce-application-c201bc9d6502.herokuapp.com/)
 #### Introduction Video From The App
 https://github.com/yssfklc/e-commerce-app/assets/121329421/c082739e-0a47-4846-84c1-2a03724918fa
 
