@@ -42,19 +42,18 @@ function Productcard({id, name, description, price, image, avg_rating, num_voter
         getProducts();
     }, [])
   return (
-        <div className='border-2 border-red-700 bg-gray-700 flex flex-col justify-between rounded-lg mb-5 mr-5'>
+        <div className='border-2 border-red-700 bg-gray-700 flex flex-col justify-between rounded-lg mb-5 mr-5 max-sm:mb-1'>
               <Link to={`../products/${id}`} className='product-link'>
-                <div className='w-60'>
-                  <img src={image} alt='' className='w-80 h-72 object-cover rounded-t-lg' />
-                  <div className='text-gray-100 mt-5'>
+                <div className='w-60 max-sm:w-full max-sm:flex'>
+                  <img src={image} alt='' className='w-80 h-72 object-cover rounded-t-lg max-sm:h-24 max-sm:w-28 pr-2 ' />
+                  <div className='text-gray-100 mt-5 max-sm:h-24 max-sm:m-0 max-sm:border-l-2 max-sm:border-gray-100 pl-2 '>
                     <div className='flex justify-between'>
                       <h2 className='font-bold'>{name} <span>{description}</span></h2>
                     </div>
-                      <div className='text-gray-100 my-1'>
+                      <div className='text-gray-100 my-1 max-sm:m-0'>
                       <Rating name="read-only" value={avg_rating} readOnly className='rating'/> {num_voters}
                       </div>
-                    <span className='line-through'>$10 </span><span className='text-green-600 text-lg no-underline'>  ${price}</span>
-                    
+                    <span className='line-through'>$10 </span><span className='text-green-600 text-lg no-underline'>  ${price}</span>  
                   </div>
                 </div>
               </Link>

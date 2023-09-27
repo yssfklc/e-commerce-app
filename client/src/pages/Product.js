@@ -11,7 +11,7 @@ function Product() {
     const navigate=useNavigate();
 const getProductsById = async(productId)=>{
     try{
-        const response = await fetch('api/productsbyid',{
+        const response = await fetch('/api/productsbyid',{
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
@@ -49,15 +49,15 @@ useEffect(()=>{
     <div className=''>
       {product.map((item)=>{
         return(
-        <div className='flex flex-col items-start justify-start ml-20 p-10 min-h-screen'>
+        <div className='flex flex-col items-start justify-start ml-20 p-10 min-h-screen max-sm:ml-2 max-sm:p-5'>
             <button className='ml-6 mb-5 bg-indigo-400 rounded-lg py-1 px-3' onClick={() => navigate(-1)}>
                     Go Back
             </button>
-            <div className='flex items-start justify-start'>
-                <div className='px-5'>
-                    <img src={item.image} className='rounded-md w-96 h-96 object-cover'/>
+            <div className='flex items-start justify-start max-sm:flex-col'>
+                <div className='px-5 max-sm:w-full max-sm:mb-3'>
+                    <img src={item.image} className='rounded-md w-96 h-96 object-cover max-sm:w-full'/>
                 </div>
-                <div className='w-96'>
+                <div className='w-96 max-sm:w-full'>
                     <h2 className='text-gray-100 font-bold text-lg mb-3'>{item.name}</h2>
                      <Rating name="read-only" value={item.avg_rating} readOnly />
                     <p className='text-gray-100 mb-3 text-justify'>{item.long_description}</p>

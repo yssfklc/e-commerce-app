@@ -52,7 +52,7 @@ const handleClick=(event)=>{
 const handleGoogleAuth=(event)=>{
     event.preventDefault();
     window.open('/auth/google', '_self');
-
+    navigate('/orders');
 }
 useEffect(()=>{
     console.log(isLogin)
@@ -65,7 +65,7 @@ useEffect(()=>{
 }, [isLogin, ])
     return (
         <div className="flex flex-col items-center  justify-center  min-h-screen">
-            <div className="bg-gray-500 py-8 px-4 rounded-lg w-1/5">
+            <div className="bg-gray-500 py-8 px-4 rounded-lg w-1/5 max-sm:w-4/5">
                 <form >
                     <div className="flex items-center justify-center ">
                         <img src={personlogo} className="w-10"/>

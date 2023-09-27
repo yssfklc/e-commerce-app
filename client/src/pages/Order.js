@@ -14,7 +14,7 @@ const remove={
 
 const getOrdersById = async(orderId)=>{
     try{
-        const response = await fetch('api/ordersbyid',{
+        const response = await fetch('/api/ordersbyid',{
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
@@ -44,26 +44,9 @@ useEffect(()=>{
         <div className=''>
           <h2 className='text-gray-100 text-4xl font-bold mr-10 mb-3'>Order Details</h2>   
         </div>    
-          <div className='flex flex-wrap justify-center w-3/5 mb-10'>
+          <div className='flex flex-wrap justify-center w-3/5 mb-10 max-sm:w-full'>
           { product.map((item)=>{
            return (
-      //      <div className='card'>
-      //      <Link to={`../../products/${item.id}`} className='product-link'>
-      //      <div >
-      //        <img src={item.image} />
-      //        <div className='flex-space-evenly'>
-      //          <div className='item-head'>
-      //            <h2>{item.name} <span>{item.description}</span></h2>
-                 
-      //          </div>
-      //            <span className='rating-span'>
-      //            <Rating name="read-only" value={item.avg_rating} readOnly className='rating'/>{item.num_voters}
-      //            </span>
-      //            <span className='price'>${item.price}</span>
-      //        </div>
-      //      </div>
-      //        </Link>
-      //  </div>
             <Productcard id={item.id} name={item.name} description={item.description} price={item.price} image={item.image} avg_rating={item.avg_rating} num_voters={item.num_voters} remove={remove}/>
 
        )
