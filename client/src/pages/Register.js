@@ -10,7 +10,8 @@ function Register(){
 const [email, setEmail]=useState('');
 const [password, setPassword]=useState('');
 const [err, setErr]=useState('');
-
+const [pasErr, setPasErr]=useState('');
+const [bothErr, setBothErr]=useState('')
 const navigate = useNavigate();
 
 
@@ -33,11 +34,12 @@ const handleClick=(event)=>{
     if(err !== ''){
         return
     }
+
     if(email==='' || password===''){
         return setErr('Fill password and email area');
     }
     let data ={
-        email:email,
+        username:email,
         password:password
     } 
     async function register(data){
@@ -85,7 +87,7 @@ const handleClick=(event)=>{
                     <div className="flex flex-col">
                         <label className="text-gray-100 text-xs mb-1">Password</label>
                         <input type="password" value={password} onChange={handlePassword} className="rounded-lg bg-gray-800 text-gray-100 h-8 text-sm px-1" placeholder="Type Your Password"/>
-                        <span className="text-red-800 text-xs">{err?err:''}</span>
+                        <span className="text-red-800 text-xs">{err?err:pasErr}</span>
                     </div>
                     <button type="submit" onClick={event=>handleClick(event)}  className="bg-indigo-500 mt-5 mb-3 text-gray-100 py-1 rounded-lg w-full px-8">Register</button>
                 </form>
