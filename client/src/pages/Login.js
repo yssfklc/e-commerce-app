@@ -13,6 +13,8 @@ function Register(){
 const [email, setEmail]=useState('');
 const [password, setPassword]=useState('');
 const [err, setErr]=useState('');
+const [pasErr, setPasErr]=useState('');
+const [bothErr, setBothErr]=useState('');
 const dispatch= useDispatch();
 const isLogin=useSelector(isLoggedin);
 const loading=useSelector(isLoading);
@@ -31,13 +33,19 @@ const handleEmail=(e)=> {
     setEmail(e.target.value);
   };
   function handlePassword(e) {
+    
+ 
+    setBothErr('');
     setPassword(e.target.value);
-    setErr('');
+
   }
 const handleClick=(event)=>{
     event.preventDefault();
+    if(err !== ''){
+        return
+    }
     if(email==='' || password===''){
-        return setErr('Fill password and username area');
+        return setBothErr('Fill password and email area');
     }
     let data ={
         username:email,
@@ -45,15 +53,16 @@ const handleClick=(event)=>{
     } 
     dispatch(tryLogin(data));
     
-    if(!loading){
-        if(isLogin){
+    
+        if(!loading && isLogin){
             console.log('tried to navigate')
             navigate('/orders');
-        }else{
+        }else if(!loading && !isLogin){
+            console.log(mess)
             setErr(mess)
             navigate('/login');
         }
-    }
+    
 }
 const handleGoogleAuth=(event)=>{
     event.preventDefault();
@@ -61,7 +70,7 @@ const handleGoogleAuth=(event)=>{
     navigate('/orders');
 }
 useEffect(()=>{
-    console.log(isLogin)
+    
     if(isLogin){
         console.log('tried to navigate')
         navigate('/orders');
@@ -83,7 +92,7 @@ useEffect(()=>{
                     <div className="flex flex-col">
                         <label className="text-gray-100 text-xs mb-1">Password</label>
                         <input type="password" value={password} onChange={handlePassword} className="rounded-lg bg-gray-800 text-gray-100 h-8 text-sm px-1 " autoComplete="current-password" placeholder="Type Your Password"/>
-                        <span className="text-red-800 text-xs">{err?err:''}</span>
+                        <span className="text-red-800 text-xs">{err?err:bothErr}</span>
                     </div>
                     <button type="submit" onClick={event=>handleClick(event)}  className="bg-indigo-500 mt-5 mb-3 text-gray-100 py-1 rounded-lg w-full px-8">Login</button>
                 </form>
