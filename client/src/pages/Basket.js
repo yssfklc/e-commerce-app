@@ -62,13 +62,13 @@ function Basket() {
   }, [])
   
   return (
-    <div className='flex items-start justify-center min-h-screen max-sm:flex-col'>
+    <div className='flex items-start justify-center min-h-screen max-md:flex-col'>
           
           
             
-            <div className='flex flex-wrap justify-center w-3/5 mb-10 max-sm:w-full max-sm:mx-auto'>
+            <div className='flex flex-wrap justify-center w-3/5 mb-10 max-md:w-full max-md:mx-auto'>
 
-            { basket.length===0?<p className='text-gray-100 sm:hidden'> Add Products To See Here</p>:basket.map((item)=>{
+            { basket.length===0?<p className='text-gray-100 md:hidden'> Add Products To See Here</p>:basket.map((item)=>{
             return (
           <Productcard id={item.id} name={item.name} description={item.description} price={item.price} image={item.image} avg_rating={item.avg_rating} num_voters={item.num_voters} remove={remove} />
           )
@@ -76,7 +76,7 @@ function Basket() {
             </div>
 
           
-          <div className='bg-gray-300 flex flex-col justify-center sticky top-16 mt-1 w-80 py-10 px-8 rounded-lg border-2 border-indigo-500 max-sm:static max-sm:w-11/12 max-sm:mx-auto' >
+          <div className='bg-gray-300 flex flex-col justify-center sticky top-16 mt-1 w-80 py-10 px-8 rounded-lg border-2 border-indigo-500 max-md:static max-sm:w-10/12 max-md:w-8/12 max-md:mx-auto' >
           <div className='flex justify-between py-1 px-1 font-bold border-b-2'>
                   <p>Name</p>
                   <p>Price</p>
