@@ -6,7 +6,6 @@ const url='api/login';
 
 
 export const tryLogin=createAsyncThunk('users/tryLogin', async(data)=>{
-        console.log('login-request sent')
         try{
             const response = await fetch(url, {
                 method: 'POST',
@@ -60,12 +59,9 @@ const addSessionSlice=createSlice({
             state.hasError = false;
         })
         .addCase(tryLogin.fulfilled, (state, action) => {
-            console.log(action.payload);
-            console.log('request fullfilled');
             state.isLoading = false;
             state.hasError = false;
             if(action.payload.user){
-                console.log(action.payload.user)
                 state.userId=action.payload.user;
                 state.isLoggedin=true;
             }
