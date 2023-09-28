@@ -44,7 +44,7 @@ useEffect(()=>{
         <div className=''>
           <h2 className='text-gray-100 text-4xl font-bold mr-10 mb-3'>Order Details</h2>   
         </div>    
-          <div className='flex flex-wrap justify-center w-3/5 mb-10 max-sm:w-full'>
+          <div className='flex flex-wrap justify-center w-3/5 mb-10 max-md:w-full'>
           { product.map((item)=>{
            return (
             <Productcard id={item.id} name={item.name} description={item.description} price={item.price} image={item.image} avg_rating={item.avg_rating} num_voters={item.num_voters} remove={remove}/>
