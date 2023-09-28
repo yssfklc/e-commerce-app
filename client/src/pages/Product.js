@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Rating from '@mui/material/Rating';
-import { useDispatch } from 'react-redux';
-import { addToBasket } from '../features/addBasketSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToBasket, selectAllBasket } from '../features/addBasketSlice';
 
 function Product() {
     const {productId} = useParams();
     const [product, setProduct]= useState([]);
     const dispatch = useDispatch();
+    const basket = useSelector(selectAllBasket);
     const navigate=useNavigate();
 const getProductsById = async(productId)=>{
     try{
@@ -26,7 +27,6 @@ const getProductsById = async(productId)=>{
         if(response.ok){
             const data = await response.json();
             setProduct(data);
-            console.log(data);
         }
     }catch(error){
         console.log(error);
@@ -37,6 +37,15 @@ const handleBasket=(e)=>{
     e.preventDefault();
     product.map(item=>{
       if(item.id==e.target.value){
+        let isInBasket=false;
+        basket.forEach(bsk=>{
+            if(bsk.id==item.id){
+                isInBasket=true
+            }
+        })
+        if(isInBasket){
+        return; 
+        }
         dispatch(addToBasket(item))
       }});
 

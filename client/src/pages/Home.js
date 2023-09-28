@@ -20,28 +20,6 @@ function Home() {
     isempty:false,
     isRemove:false
   };
-//   const getOrdersById = async(orderId)=>{
-//     try{
-//         const response = await fetch('/api/ordersbyid',{
-//             method: 'POST',
-//             headers: {
-//                 "Content-Type": "application/json",
-//                 "Access-Control-Allow-Origin": "*"
-//                 // 'Content-Type': 'application/x-www-form-urlencoded',
-//             },
-//             body: JSON.stringify({
-//                 id: orderId
-//             })
-//         }
-//         )
-//         if(response.ok){
-//             const data = await response.json();
-//             setProducts(data);
-//         }
-//     }catch(error){
-//         console.log(error);
-//     }
-// }
 
   const getOrder = async()=>{
     try{

@@ -9,8 +9,6 @@ function Productcard({id, name, description, price, image, avg_rating, num_voter
     const [products, setProducts]=useState([]);
     const dispatch = useDispatch();
     const basket = useSelector(selectAllBasket);
-    const isempty=remove.isempty;
-    const isRemove=remove.isRemove;
     
     const getProducts = async()=>{
         try{
@@ -27,7 +25,17 @@ function Productcard({id, name, description, price, image, avg_rating, num_voter
     const handleBasket=(e)=>{
         e.preventDefault();
         products.map(item=>{
+          
           if(item.id==e.target.value){
+            let isInBasket=false;
+            basket.forEach(bsk=>{
+              if(bsk.id==item.id){
+                isInBasket=true
+              }
+            })
+            if(isInBasket){
+            return; 
+            }
             dispatch(addToBasket(item))
           }});
     }
@@ -35,6 +43,7 @@ function Productcard({id, name, description, price, image, avg_rating, num_voter
       e.preventDefault();
       basket.map((item)=>{
         if(item.id==e.target.value){
+          
           dispatch(removeFromBasket(item))
         }});
     })
