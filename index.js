@@ -125,7 +125,9 @@ app.get('/auth/google/failure', (req, res, next)=>{
 //   res.sendFile(path.join(__dirname, "client/public/index.html"))
 // })
 
-
+app.get('*', (req, res, next)=>{
+  res.sendFile(path.join(__dirname, "client/build/index.html"));
+})
 
 
 app.get('/api/orders', ensureAuthentication, dbquery.getOrders);
