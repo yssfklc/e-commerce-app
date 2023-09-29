@@ -58,7 +58,6 @@ const handleClick=(event)=>{
             console.log('tried to navigate')
             navigate('/orders');
         }else if(!loading && !isLogin){
-            console.log(mess)
             setErr(mess)
             navigate('/login');
         }

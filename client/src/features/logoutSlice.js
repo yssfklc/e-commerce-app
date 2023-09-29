@@ -12,7 +12,6 @@ export const tryLogout=createAsyncThunk('logout/tryLogout', async()=>{
             const response = await fetch(url);
             // const user = await response.json();
             if(response.ok){
-                console.log('lale')
                 logout();
             }else{
                 // navigate('/Logout')
@@ -40,7 +39,6 @@ const addLogoutSlice=createSlice({
         .addCase(tryLogout.fulfilled, (state, action) => {
             state.isLoading = false;
             state.hasError = false;
-            console.log('basarılı logout')
         })
         .addCase(tryLogout.rejected, (state, action) => {
             state.isLoading = false;

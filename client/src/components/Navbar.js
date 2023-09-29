@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Outlet, Link, NavLink } from "react-router-dom";
 import { isLoggedin, logout } from "../features/sessionSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -21,8 +21,8 @@ function Navbar(){
   const handleMenu=(e)=>{
     e.preventDefault();
     setIsOpen(!isOpen)
-    console.log(isOpen)
   }
+  
 
     return (
         <>
