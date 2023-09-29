@@ -9,7 +9,6 @@ function Productcard({id, name, description, price, image, avg_rating, num_voter
     const [products, setProducts]=useState([]);
     const dispatch = useDispatch();
     const basket = useSelector(selectAllBasket);
-    
     const getProducts = async()=>{
         try{
           const response = await fetch('/api/products')
@@ -51,10 +50,10 @@ function Productcard({id, name, description, price, image, avg_rating, num_voter
         getProducts();
     }, [])
   return (
-        <div className='border-2 border-red-700 bg-gray-700 flex flex-col justify-between rounded-lg mb-5 mr-5 max-md:mb-1'>
+        <div className='border-2 border-red-700 bg-gray-700 flex flex-col justify-between rounded-lg mb-5 mr-5 max-md:mb-1 max-md:w-full'>
               <Link to={`../products/${id}`} className='product-link'>
                 <div className='w-60 max-md:w-full max-md:flex'>
-                  <img src={image} alt='' className='w-80 h-72 object-cover rounded-t-lg max-md:h-24 max-md:w-28 pr-2 ' />
+                  <img src={image} alt='' className='w-80 h-72 object-cover rounded-t-lg max-md:h-24 max-md:w-28 max-md:object-cover pr-2  ' />
                   <div className='text-gray-100 mt-5 max-md:h-24 max-md:m-0 max-md:border-l-2 max-md:border-gray-100 pl-2 '>
                     <div className='flex justify-between'>
                       <h2 className='font-bold'>{name} <span>{description}</span></h2>

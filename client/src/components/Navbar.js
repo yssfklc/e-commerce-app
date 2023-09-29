@@ -26,7 +26,7 @@ function Navbar(){
 
     return (
         <>
-          <div className='flex justify-between bg-gray-800 text-gray-200 py-3 px-10 text-xl max-md:text-sm max-md:px-5 sticky top-0 max-md:h-14 max-md:justify-between'>
+          <div className='flex justify-between bg-gray-800 text-gray-200 py-3 px-10 text-xl max-md:text-sm max-md:px-5 sticky top-0 max-md:h-14 max-md:justify-between z-10'>
             <div className='flex items-center justify-between max-md:justify-start'>
                 <NavLink><img src={i1} alt="" className="w-12 mr-5 max-md:w-10 max-md:block"/></NavLink>
                 <NavLink to='/home' className={ ({ isActive }) => isActive? 'activeNavLink text-2xl pr-5 max-md:text-xs max-md:pr-2 max-md:hidden ' : 'pinactiveNavLink pr-5 max-md:hidden'} >Home</NavLink>

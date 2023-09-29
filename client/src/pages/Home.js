@@ -26,6 +26,7 @@ function Home() {
       const response = await fetch('/api/products')
       if(response.ok){
         const result = await response.json();
+        console.log(result)
         setProducts(result);
       }
     }catch(error){
