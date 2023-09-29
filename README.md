@@ -1,6 +1,7 @@
 # E-commerce-app full-stack PERN app
 Creating a backend project for an e-commerce app. 
   - Express.js is used to create api paths and requests.
+  - *Responsive* design
   - For login passport.js and bcrypt library is used.
   - PostgreSQL(relational database) database is used to store data and sql is used to retrieve and write datas.
   - Frontend login-products-orders pages are developed and added picture below(Pictures from the app are at the bottom.)
@@ -16,7 +17,7 @@ https://github.com/yssfklc/e-commerce-app/assets/121329421/c082739e-0a47-4846-84
  4. Register/Login via passport.js.
  5. Check and search products and check your own orders.
  6. Authentication based access.
- 7. Third party Authentication
+ 7. Third party(Google Oauth2) Authentication
 
 ### API Documentation is created by Swagger Editor
   - A picture is added from the swagger editor and ui
