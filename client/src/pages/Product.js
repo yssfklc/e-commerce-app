@@ -68,7 +68,7 @@ useEffect(()=>{
                 </div>
                 <div className='w-96 max-md:w-full'>
                     <h2 className='text-gray-100 font-bold text-lg mb-3'>{item.name}</h2>
-                     <Rating name="read-only" value={item.avg_rating} readOnly />
+                     <Rating name="read-only" value={item.avg_rating} readOnly className=''/>
                     <p className='text-gray-100 mb-3 text-justify'>{item.long_description}</p>
                     <div className='flex justify-center items-center'>
                         <div className='rounded-xl border-2 border-indigo-500 mt-2'>

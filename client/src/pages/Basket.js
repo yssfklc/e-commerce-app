@@ -7,6 +7,7 @@ import Productcard from '../components/Productcard';
 
 
 function Basket() {
+  const [err, setErr]=useState('');
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const basket = useSelector(selectAllBasket);
@@ -20,7 +21,8 @@ function Basket() {
 
   const createOrder =((e)=>{
     e.preventDefault();
-    if(isLoggedin){
+    if(isLoggedin && basket.length !== 0){
+      console.log(isLoggedin)
       const product_id = (basket.map(item=>item.id));
       const order_obj={
         user_id:currentUserId.payload,
@@ -49,8 +51,16 @@ function Basket() {
         }
       }
       createOrder(order_obj);
+    }else if(!isLoggedin){
+      setErr('You need to login to create an order')
+      return
+      // navigate('/login');
+    }else if(basket.length === 0){
+      setErr('You need to add products to create an order')
+      return
     }else{
-      navigate('/login');
+      setErr('Something went wrong')
+      return
     }
   })
   
@@ -91,6 +101,7 @@ function Basket() {
               )
             })}
             <div className='border-t-2 border-indigo-500 flex justify-between'><span className='font-bold '>Total price</span> : <span>$ {totalPrice}</span></div>
+            <p className='text-red-700 text-sm'>{err?err:null}</p>
             <button type='submit' className='bg-indigo-500 rounded-lg mt-5 py-1 px-3' onClick={(e)=>createOrder(e)} >Create Order</button>
           </div>
     </div>
