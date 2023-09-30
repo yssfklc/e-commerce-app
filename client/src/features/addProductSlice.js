@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-const url='api/products';
+const url='/api/products';
 
 const getAllProducts = async()=>{
     try{
@@ -18,7 +18,7 @@ export const loadAllProducts = createAsyncThunk('allProducts/loadAllProducts', a
     try{
       const response = await fetch(url)
       if(response.ok){
-        const result = await response.json();     
+        const result = await response.json(); 
         return result;
       }
     }catch(error){

@@ -29,7 +29,6 @@ function Products() {
   
   
   // queries start
-    console.log('lale');
     temporary.map(item=>{
       let count=0;
       products.map(product=>{
