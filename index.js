@@ -125,9 +125,7 @@ app.get('/auth/google/failure', (req, res, next)=>{
 //   res.sendFile(path.join(__dirname, "client/public/index.html"))
 // })
 
-app.get('*', (req, res, next)=>{
-  res.sendFile(path.join(__dirname, "client/build/index.html"));
-})
+
 
 
 app.get('/api/orders', ensureAuthentication, dbquery.getOrders);
@@ -143,6 +141,10 @@ app.put('/api/products', dbquery.updateProduct);
 app.get('/api/carts', dbquery.getCarts);
 app.post('/api/carts', dbquery.createCarts);
 app.post('/api/register', passportRouter);
+
+app.get('*', (req, res, next)=>{
+  res.sendFile(path.join(__dirname, "client/build/index.html"));
+})
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)

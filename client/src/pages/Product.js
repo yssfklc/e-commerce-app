@@ -11,6 +11,7 @@ function Product() {
     const basket = useSelector(selectAllBasket);
     const navigate=useNavigate();
 const getProductsById = async(productId)=>{
+    
     try{
         const response = await fetch('/api/productsbyid',{
             method: 'POST',

@@ -22,7 +22,6 @@ function Basket() {
   const createOrder =((e)=>{
     e.preventDefault();
     if(isLoggedin && basket.length !== 0){
-
       const product_id = (basket.map(item=>item.id));
       const order_obj={
         user_id:currentUserId.payload,
